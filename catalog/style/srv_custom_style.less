@@ -1,0 +1,175 @@
+/* Define custom node style here */
+ .body {
+}
+/* Ausblenden von Filteroptionen in der Suche */
+/*Verfügbare Aktionen*/
+ .gn-facet.gn-facet-mdActions {
+     display: none;
+}
+/*Auflösungen*/
+ .gn-facet.gn-facet-resolutions {
+     display: none;
+}
+/*Maßstäbe*/
+ .gn-facet.gn-facet-denominators {
+     display: none;
+}
+/*Bereitgestellt von*/
+ .gn-facet.gn-facet-sourceCatalog {
+     display: none;
+}
+/*status ausblenden*/
+ .gn-facet.gn-facet-status {
+     display: none;
+}
+/*Mail-Button ausblenden */
+ .md-feedback {
+     display: none;
+}
+/*Filter-Badges auf der Front-Seite etwas kürzen (XX vw) damit es nicht zu unschönen Boxen kommt - gerade wenn das Fenster verkleinert wird und/oder im responsive Design */
+ @media (max-width: 767px) {
+     .gn-row-topics .badge-text {
+         max-width: 48vw;
+    }
+}
+ @media (min-width: 768px) and (max-width: 991px) {
+     .gn-row-topics .badge-text {
+         max-width: 24vw;
+    }
+}
+ .badge-text {
+     height: 100%;
+     line-height: 110%;
+     padding-left: 8px;
+     padding-right: 4px;
+     margin-top: 13px;
+     font-size: 13px;
+     max-width: 12vw;
+     white-space: nowrap;
+     color: #fff;
+     font-weight: bold;
+}
+/*ENDE Filter-Badges-Anpassung*/
+/* Burger-Menü im responsive-Modus deaktivieren */
+ .navbar-default .navbar-toggle {
+     border-color: #ddd;
+     display: none;
+}
+/* Footer-Links hover Berlin-rot */
+ .gn-bottom-bar a:hover {
+     color: #c42b31 !important;
+     background-color: #EFEFEF !important;
+}
+/*Ressourcen-Farbe - Button - als Kategorie ROT statt grün in der Metadatenansicht */
+ .resource-color {
+     color: #c42b31;
+}
+/* Buttons zum Herunterladen der Metadaten und zum Wechseln der Ansicht (full-view, etc.) entfernen */
+ .btn-toolbar .btn-group.pull-right, .btn-toolbar .pull-right .btn-group {
+     margin-left: 5px;
+     margin-right: 0;
+     display: none;
+}
+/* LOGO vertikal mittig ausrichten */
+ .navbar-default .gn-logo-link .gn-logo {
+     margin-top: 0px;
+}
+/*Auswahl-Checkboxen aus den Karteikarten der Suche entfernen */
+ ul.gn-resultview li.gn-grid input {
+     float: left;
+     display: none;
+}
+ .btn-group > .btn-group {
+     float: left;
+     display: none;
+}
+ .gn-facet h4 {
+     font-size: 14px;
+     font-weight: bold;
+     text-transform: none;
+}
+ .table-striped > tbody > tr {
+     background-color: #f9f9f9;
+}
+ .gn-metadata-display h2 {
+     font-size: 18px;
+     margin-bottom: 20px;
+     font-weight: bold;
+}
+ .navbar-default .gn-logo-link .gn-name {
+     margin-top: 5px;
+     display: inline-block;
+     font-weight: bold;
+}
+ .gn-facet .gn-facet-count, .gn-facet .list-group-item > span.fa {
+     color: #222222;
+     float: right;
+     font-style: italic;
+}
+ .gn-related-description.ng-binding.ng-scope {
+     display:none;
+}
+/*diverse optische Anpassung gemäß Berlin CD */
+ .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+     padding: 8px;
+     line-height: 1.428571429;
+     vertical-align: top;
+     border: 1px solid #ddd;
+}
+ .table-striped > tbody > tr {
+     background-color: white;
+}
+ .table-striped > tbody > tr:nth-of-type(2n+1) {
+     background-color: white 
+}
+ .gn-bottom-bar {
+     height: 50px;
+     color: white;
+     position: fixed;
+     bottom: 0;
+     overflow: hidden;
+     width: 100%;
+     margin-bottom: 0;
+     border-radius: 0;
+     border-width: 1px 0 0 0;
+     background: #545454;
+     border-color: black;
+     z-index: 98;
+}
+ .gn-bottom-bar a {
+     color: white !important;
+}
+ .gn-row-results {
+     padding-top: 15px;
+     background-color: white;
+}
+ .gn-row-info {
+     padding: 30px 20px 40px 20px;
+     background-color: white;
+}
+ .navbar-default {
+     border-color:black;
+}
+ .gn-bottom-bar a:hover {
+     color: white !important;
+     background: #545454 !important;
+}
+ .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > li > a:focus, .navbar-default .navbar-nav > .open > a:focus, .navbar-default .navbar-nav > .active > a:focus {
+     text-decoration: underline;
+}
+ .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > li > a:focus, .navbar-default .navbar-nav > .open > a:focus, .navbar-default .navbar-nav > .active > a:focus {
+     background-color: white;
+     text-decoration: underline;
+}
+ .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > li > a:focus, .navbar-default .navbar-nav > .open > a:focus, .navbar-default .navbar-nav > .active > a:focus {
+     color: black;
+}
+ .gn-md-view {
+     padding: 15px 20px;
+     background-color: white !important;
+}
+.navbar-default .navbar-nav > li > a:focus, .navbar-default .navbar-nav > .open > a:focus, .navbar-default .navbar-nav > .active > a:focus {
+	background-color: transparent;
+	text-decoration: underline;
+}
+.list-style-type: none !important;

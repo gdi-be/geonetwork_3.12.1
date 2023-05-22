@@ -1,0 +1,59 @@
+<ows-context:OWSContext xmlns:ows-context="http://www.opengis.net/ows-context" xmlns:ows="http://www.opengis.net/ows" version="0.3.1" id="ows-context-ex-1-v3">
+        <ows-context:General>
+                <ows:BoundingBox crs="EPSG:25833">
+                        <ows:LowerCorner>370000.0 5800000.0</ows:LowerCorner>
+                        <ows:UpperCorner>415000.0 5837000.0</ows:UpperCorner>
+                </ows:BoundingBox>
+        </ows-context:General>
+        <ows-context:ResourceList>
+				<ows-context:Layer queryable="false" name="de_basemapde_web_raster_grau" hidden="false" opacity="1" group="Background layers">
+                        <ows:Title>Basemap.de WMS</ows:Title>
+                        <ows-context:Server service="urn:ogc:serviceType:WMS">
+                                <ows-context:OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://sgx.geodatenzentrum.de/wms_basemapde?"/>
+                        </ows-context:Server>
+                        <ows-context:StyleList/>
+                </ows-context:Layer>
+                <ows-context:Layer queryable="false" name="WebAtlasDE_BEBB_halbton" hidden="true" opacity="1" group="Background layers">
+                        <ows:Title>WebAtlasDE halbton WMS</ows:Title>
+                        <ows-context:Server service="urn:ogc:serviceType:WMS">
+                                <ows-context:OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://isk.geobasis-bb.de/mapproxy/webatlasde/service/wms?"/>
+                        </ows-context:Server>
+                        <ows-context:StyleList/>
+                </ows-context:Layer>
+                <ows-context:Layer queryable="false" name="WebAtlasDE_BEBB_grau" hidden="true" opacity="1" group="Background layers">
+                        <ows:Title>WebAtlasDE grau WMS</ows:Title>
+                        <ows-context:Server service="urn:ogc:serviceType:WMS">
+                                <ows-context:OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://isk.geobasis-bb.de/mapproxy/webatlasde/service/wms?"/>
+                        </ows-context:Server>
+                        <ows-context:StyleList/>
+                </ows-context:Layer>
+                <ows-context:Layer queryable="false" name="{type=wmts,name=WebAtlasDE_BEBB_halbton}" hidden="true" opacity="1" group="Background layers">
+                        <ows:Title xmlns:ows="http://www.opengis.net/ows">WebAtlasDE halbton WMTS</ows:Title>
+                        <ows-context:Server service="urn:ogc:serviceType:WMTS">
+                                <ows-context:OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://isk.geobasis-bb.de/mapproxy/webatlasde_wmts/service?"/>
+                        </ows-context:Server>
+                        <ows-context:StyleList/>
+                </ows-context:Layer>
+                <ows-context:Layer queryable="false" name="{type=wmts,name=WebAtlasDE_BEBB_grau}" hidden="true" opacity="1" group="Background layers">
+                        <ows:Title xmlns:ows="http://www.opengis.net/ows">WebAtlasDE grau WMTS</ows:Title>
+                        <ows-context:Server service="urn:ogc:serviceType:WMTS">
+                                <ows-context:OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://isk.geobasis-bb.de/mapproxy/webatlasde_wmts/service?"/>
+                        </ows-context:Server>
+                        <ows-context:StyleList/>
+                </ows-context:Layer>
+                <ows-context:Layer queryable="false" name="web" hidden="true" opacity="1" group="Background layers">
+                        <ows:Title>TopPlusOpen web WMS</ows:Title>
+                        <ows-context:Server service="urn:ogc:serviceType:WMS">
+                                <ows-context:OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://sgx.geodatenzentrum.de/wms_topplus_open?"/>
+                        </ows-context:Server>
+                        <ows-context:StyleList/>
+                </ows-context:Layer>
+                <ows-context:Layer queryable="false" name="web_grau" hidden="true" opacity="1" group="Background layers">
+                        <ows:Title>TopPlusOpen web grau WMS</ows:Title>
+                        <ows-context:Server service="urn:ogc:serviceType:WMS">
+                                <ows-context:OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://sgx.geodatenzentrum.de/wms_topplus_open?"/>
+                        </ows-context:Server>
+                        <ows-context:StyleList/>
+                </ows-context:Layer>
+        </ows-context:ResourceList>
+</ows-context:OWSContext>
