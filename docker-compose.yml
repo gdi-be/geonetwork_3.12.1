@@ -1,0 +1,59 @@
+version: '3'
+services:
+  gnos:
+    container_name: gnos
+    build:
+      dockerfile: Dockerfile
+      context: ./
+    restart: always
+    depends_on:
+      - postgres
+      - elasticsearch
+    ports:
+      - 8080:8080
+    environment:
+      DATA_DIR: /var/lib/geonetwork_data
+      ES_HOST: elasticsearch
+      ES_PROTOCOL: http
+      ES_PORT: 9200
+
+      KB_URL: http://kibana:5601
+    volumes:
+      - ./gn-public-data:/var/lib/geonetwork-data:z
+      - ./logs/:/var/lib/jetty/logs/:z
+  elasticsearch:
+    image: nexus.terrestris.de/elasticsearch:7.11.1
+    container_name: elasticsearch
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+    environment:
+      ES_JAVA_OPTS: "-Xms1G -Xmx1G"
+      discovery.type: single-node
+    volumes:
+      - ./esdata-public:/usr/share/elasticsearch/data:z
+  kibana:
+    image: nexus.terrestris.de/kibana:7.11.1
+    container_name: kibana
+    environment:
+      SERVER_NAME: 'kibana'
+      ELASTICSEARCH_HOSTS: '["http://elasticsearch:9200"]'
+      SERVER_BASEPATH: '/geonetwork/dashboards'
+      SERVER_REWRITEBASEPATH: 'false'
+      KIBANA_INDEX: .dashboards
+      XPACK_MONITORING_UI_CONTAINER_ELASTICSEARCH_ENABLED: 'true'
+  postgres:
+    image: library/postgres:15
+    container_name: postgres
+    restart: always
+    volumes:
+      - ./postgresql_data:/var/lib/postgresql/data:z
+      - ./dumps:/dumps:z
+    ports:
+      - 5555:5432
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: trust
