@@ -20,3 +20,4 @@ COPY catalog/views/default/templates/footer.html /var/lib/jetty/webapps/geonetwo
 COPY catalog/views/default/templates/results.html /var/lib/jetty/webapps/geonetwork/catalog/views/default/templates/results.html
 COPY Gn.js /var/lib/jetty/webapps/geonetwork/catalog/js/Gn.js
 COPY log4j2.xml /var/lib/jetty/webapps/geonetwork/WEB-INF/classes/
+COPY summary.html /var/lib/jetty/webapps/geonetwork/catalog/views/default/templates/recordView/summary.html
