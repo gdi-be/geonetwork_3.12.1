@@ -1,4 +1,4 @@
-FROM geonetwork:4.2.4
+FROM geonetwork:4.2.5
 
 USER root
 RUN apt -y update && apt -y upgrade && apt -y install vim && apt clean
