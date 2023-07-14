@@ -63,20 +63,27 @@
     </div>
   </div>
 
-  <div
-    class="gn-margin-bottom flex-row"
-    data-ng-if="mdView.current.record.resourceType[0] == 'service'">
-    <i class="fa fa-fw fa-server" />
-    <span>Typ: Dienst</span>
-  </div>
+</div>
 
-  <div
+<div
+  class="gn-margin-bottom flex-row"
+  data-ng-if="mdView.current.record.resourceType[0] == 'service' && mdView.current.record.serviceType == 'download'">
+  <i class="fa fa-fw fa-server" />
+  <span>Typ: Downloaddienst</span>
+</div>
+
+<div
+  class="gn-margin-bottom flex-row"
+  data-ng-if="mdView.current.record.resourceType[0] == 'service' && mdView.current.record.serviceType == 'view'">
+  <i class="fa fa-fw fa-server" />
+  <span>Typ: Darstellungsdienst</span>
+</div>
+
+<div
   class="gn-margin-bottom flex-row"
   data-ng-if="mdView.current.record.resourceType[0] != 'service'">
-    <i class="fa fa-fw fa-database" />
-    <h3>Typ: Daten</h3>
-  </div>
-
+  <i class="fa fa-fw fa-database" />
+  <h3>Typ: Daten</h3>
 </div>
 
 </section>

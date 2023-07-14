@@ -22,7 +22,7 @@ index d99039e..4d3ecf6 100644
 @@ -21,11 +21,11 @@
  # Rome - Italy. email: geonetwork@osgeo.org
  #
-
+ 
 -jdbc.username=#{systemEnvironment['GEONETWORK_DB_USERNAME']?:'www-data'}
 -jdbc.password=#{systemEnvironment['GEONETWORK_DB_PASSWORD']?:'www-data'}
 -jdbc.database=#{systemEnvironment['GEONETWORK_DB_NAME']?:'~/gn'}
@@ -47,13 +47,13 @@ index c10e7e8..cb2cdbd 100644
 +
    <import resource="classpath*:/config-spring-geonetwork.xml"/>
    <import resource="../config-db/database_migration.xml"/>
-
+ 
 -  <!-- Default using the db.config.file if it exists
 -       and if not then derive the db file based on the db.type.
 -
 -       Use Java argument -Dgeonetwork.db.type=postgres to customize
 -        the database type or change the resource URL to ../config-db/postgres.xml.
-
+ 
 -       Supported types:
 -       * db2
 -       * h2 (default)
@@ -81,12 +81,12 @@ index 238e633..4a9e253 100644
 --- a/WEB-INF/config.properties
 +++ b/WEB-INF/config.properties
 @@ -47,7 +47,7 @@ urlChecker.UserAgent=GeoNetwork Link Checker
-
+ 
  thesaurus.cache.maxsize=400000
-
+ 
 -map.bbox.background.service=https://ows.terrestris.de/osm/service?SERVICE=WMS&amp;REQUEST=GetMap&amp;VERSION=1.1.0&amp;LAYERS=OSM-WMS&amp;STYLES=default&amp;SRS={srs}&amp;BBOX={minx},{miny},{maxx},{maxy}&amp;WIDTH={width}&amp;HEIGHT={height}&amp;FORMAT=image/png
 +map.bbox.background.service=https://sgx.geodatenzentrum.de/wms_basemapde?SERVICE=WMS&amp;REQUEST=GetMap&amp;VERSION=1.1.0&amp;LAYERS=de_basemapde_web_raster_grau&amp;STYLES=inspire_common:DEFAULT&amp;SRS={srs}&amp;BBOX={minx},{miny},{maxx},{maxy}&amp;WIDTH={width}&amp;HEIGHT={height}&amp;FORMAT=image/png
-
+ 
  # Set to false to enable the services to draw map extents (region.getmap and {metadatauuid}/extents.png) accepting
  # urls for map services to provide the background layers. Otherwise the only allowed options are from the settings
 diff --git a/catalog/components/search/mdview/partials/contact.html b/catalog/components/search/mdview/partials/contact.html
@@ -304,7 +304,7 @@ index 630e042..5d00acc 100644
        </div>
      </div>
    </div>
-
+ 
 +
    <!-- Group by role -->
 -  <div
@@ -336,7 +336,7 @@ index 630e042..5d00acc 100644
 +            {{c.org}}<br/>
            </strong>
 -          <strong data-ng-if="::!c.website"> {{c.organisation}}<br /> </strong>
-
+ 
            <span data-ng-repeat="c in contact track by $index">
 -            <div data-gn-metadata-individual="c" />
 +            <span data-ng-if="c.email != ''">
@@ -351,7 +351,7 @@ index 630e042..5d00acc 100644
 +            </span>
 +            <span data-ng-if="!$last"><br></span>
            </span>
-
+ 
            <!-- Address for organisation: display for 1st contact in organisation -->
            <span data-ng-repeat="c in contact | limitTo:1">
              <div data-ng-if="c.address != ''">{{c.address}}</div>
@@ -375,7 +375,7 @@ index 630e042..5d00acc 100644
 -  </div>
 +   </div>
 +
-
+ 
    <!-- Group by organisation/role -->
 -  <div
 -    class="gn-contact flex-row"
@@ -394,7 +394,7 @@ index 630e042..5d00acc 100644
 +        {{org}}
        </strong>
 -      <strong data-ng-if="::!orgWebsite[org]"> {{org}} </strong>
-
+ 
 -      <div
 -        ng-repeat="(key, contactGroupByAddress) in contactByOrgRole | groupBy:'address'"
 -      >
@@ -446,13 +446,13 @@ index 74ea7ce..a827c1e 100644
 +++ b/catalog/js/Gn.js
 @@ -28,10 +28,8 @@ var geonetwork = {};
    goog.provide("gn");
-
+ 
    goog.require("gn_locale");
 -  goog.require("gn_toolbar");
    goog.require("gn_count_watchers");
    goog.require("gn_polyfills");
 -  goog.require("gn_static_pages");
-
+ 
    /**
     * Main gn module.
 @@ -43,13 +41,7 @@ var geonetwork = {};
@@ -467,7 +467,7 @@ index 74ea7ce..a827c1e 100644
 -    "gn_static_pages"
 -  ]);
 +  var module = angular.module("gn", ["gn_locale", "gn_config", "cfp.hotkeys"]);
-
+ 
    // See https://docs.angularjs.org/guide/migration#commit-aa077e8
    module.config([
 @@ -59,4 +51,31 @@ var geonetwork = {};
@@ -901,7 +901,7 @@ index 499a3ac..03832e2 100644
 -@import "../lib/style/bootstrap/less/variables.less";
 +@import "../lib/style/font-awesome/less/variables";
 +@import "../lib/style/font-awesome/less/mixins";
-
+ 
  /* used to display icons with resource types - iso19139 hierarchylevel */
 -.gn-icon-dataset:before,
 -.gn-icon-datasets:before {
@@ -1238,7 +1238,7 @@ index 499a3ac..03832e2 100644
 +  .fa-icon-rotate(180deg, 2);
  }
 +.gn-icon-sibling:before { content: @fa-var-sign-out }
-
+ 
 -.gn-icon-inline {
 -  display: inline-block;
 -}
@@ -1498,7 +1498,7 @@ index 7f69285..b466a18 100644
 -@import "gn_card_default.less";
  // variables for manipulating the theme
  @import "gn_variables_default.less"; // must be last
-
+ 
  .gn-row-results {
    padding-top: 15px;
    background-color: @gn-results-background-color;
@@ -1530,7 +1530,7 @@ index 7f69285..b466a18 100644
 -    margin-bottom: 0px;
 -  }
 +}
-
+ 
 -  .gn-md-category {
 -    display: block;
 -    margin-left: 12px;
@@ -1546,7 +1546,7 @@ index 7f69285..b466a18 100644
 +    float: right;
    }
  }
-
+ 
 -.gn-row-tools {
 -  border-bottom: 1px solid #ddd;
 -  margin-bottom: 15px;
@@ -1562,7 +1562,7 @@ index 7f69285..b466a18 100644
 +ul.gn-resultview {
 +  @thumbnail-width: 140px;
 +  margin-right: -15px;
-+
++  
 +  .metadata {
 +    position: absolute;
 +    top: 0;
@@ -1585,7 +1585,7 @@ index 7f69285..b466a18 100644
      }
 -    &:focus {
 -      outline: @gn-outline;
-+
++    
 +    .gn-md-thumbnail {
 +      .gn-img-thumbnail {
 +        max-width: @thumbnail-width;
@@ -1598,7 +1598,7 @@ index 7f69285..b466a18 100644
 +        &.gn-md-edit-btn {
 +          width: 12px;
 +          margin-left: 10px;
-+
++          
 +        }
 +      }
 +      h4 {
@@ -1645,10 +1645,10 @@ index 7f69285..b466a18 100644
 +  .gn-md-abstract.ellipsis:after {
 +    background: none;
 +  }
-+
++  
 +  li.gn-grid {
 +    @grid-bottom-margin: 2px;
-+
++    
 +    float: left;
 +    border: 1px solid @list-group-border;
 +    min-width: 300px;
@@ -1697,7 +1697,7 @@ index 7f69285..b466a18 100644
 +        height: auto;
 +      }
 +    }
-+
++    
 +    .gn-md-category {
 +      display: block;
 +      float: left;
@@ -1790,7 +1790,7 @@ index 7f69285..b466a18 100644
 -        box-shadow: none;
 -        background: none;
 -        outline: @gn-outline;
-+    }
++    }    
 +    .gn-md-links {
 +      background: 0;
 +      margin-top: 10px;
@@ -1822,7 +1822,7 @@ index 7f69285..b466a18 100644
 +    width: calc(~"100% - 15px");
    }
  }
-
+ 
 -ul.gn-resultview, [data-gn-user-searches-list] {
 -  .gn-source-logo {
 -    margin-left: 5px;
@@ -1831,7 +1831,7 @@ index 7f69285..b466a18 100644
 -    float: right;
 +/* Medium devices (desktops, 992px and up) */
 +@media (min-width: @screen-md-min) {
-+
++  
 +  ul.gn-resultview li.gn-grid {
 +    width: calc(~"50% - 15px");
 +  }
@@ -1839,12 +1839,12 @@ index 7f69285..b466a18 100644
 +
 +/* Large devices (large desktops, 1200px and up) */
 +@media (min-width: @screen-lg-min) {
-+
++  
 +  ul.gn-resultview li.gn-grid {
 +    //width: calc(~"33% - 15px");
    }
  }
-
+ 
 +// nojs styles
 +.gn-nojs {
 +  .gn-resultview {
@@ -1896,7 +1896,7 @@ index 785d1cd..2736704 100644
 @@ -2,271 +2,238 @@
  // variables for manipulating the theme
  @import "gn_variables_default.less"; // must be last
-
+ 
 -// ----- colours
 -
 -@gn-topic-text: #fff;
@@ -1950,7 +1950,7 @@ index 785d1cd..2736704 100644
 +}
 +
 +// badges
-+//
++// 
 +// ----- image/icon
 +.badge-result {
 +  border-radius: 20px !important;
@@ -1966,7 +1966,7 @@ index 785d1cd..2736704 100644
 +  background: transparent;
 +  a {
 +    color: #fff;
-+    border-radius: 20px;
++    border-radius: 20px; 
 +    padding-right: 10px;
 +    &:hover {
 +      text-decoration: none;
@@ -1987,13 +1987,13 @@ index 785d1cd..2736704 100644
 +//.badge-result-topic a {
 +//  background: #2c6ea7;
 +//  &:hover {
-+//    background: #215481;
++//    background: #215481; 
 +//  }
 +//}
 +//.badge-result-type a {
 +//  background: #078A00;
 +//  &:hover {
-+//    background: #078A00;
++//    background: #078A00; 
 +//  }
 +//}
 +
@@ -2001,13 +2001,13 @@ index 785d1cd..2736704 100644
 +.badge-result-topic a {
 +  background: #666666;
 +  &:hover {
-+    background: #333333;
++    background: #333333; 
 +  }
 +}
 +.badge-result-type a {
 +  background: #c42b31;
 +  &:hover {
-+    background: #811220;
++    background: #811220; 
 +  }
 +}
 +
@@ -2376,11 +2376,11 @@ index 499d8c9..f093617 100644
 --- a/catalog/views/default/less/gn_variables_default.less
 +++ b/catalog/views/default/less/gn_variables_default.less
 @@ -4,7 +4,6 @@
-
+ 
  // general
  @gn-border-radius: 3px;
 -@gn-outline: 2px auto @brand-primary;
-
+ 
  // override bootstrap variables
  @badge-bg: @gray;
 @@ -24,8 +23,9 @@
@@ -2393,7 +2393,7 @@ index 499d8c9..f093617 100644
 +//Berlin - dunklegrau
 +@brand-primary: #333333;
  @dropdown-border: @navbar-default-border;
-
+ 
  // header
 @@ -53,10 +53,10 @@
  //
@@ -2406,7 +2406,7 @@ index 499d8c9..f093617 100644
 -@gn-search-button-border-color: @btn-default-border;
 +@gn-search-button-background-color: @brand-primary;
 +@gn-search-button-color: @btn-primary-color;
-
+ 
  @gn-search-outline-color-red: red(@gn-search-outline-color);
  @gn-search-outline-color-green: green(@gn-search-outline-color);
 @@ -67,14 +67,17 @@
@@ -2422,10 +2422,10 @@ index 499d8c9..f093617 100644
 +@gn-resultcard-title-background-color-hover: #333;
 +@gn-resultcard-title-color: #fff;
 +@gn-resultcard-title-border: 0px solid @navbar-default-border;
-
+ 
  // search results page
  @gn-results-background-color: @body-bg;
-
+ 
  // metadata page
  @gn-md-view-background-color: @body-bg;
 +@gn-search-button-border-color: @btn-default-border;
@@ -2541,7 +2541,7 @@ index a1058c6..93ddcb3 100644
 -    <a href="../../doc/api" title="{{'learnTheApi' | translate}}">API</a>
 -  </li>
 +<ul class="nav navbar-nav">
-+
++	
 +	<!--
 +	<li class="navbar-text">
 +		<span data-translate=""
@@ -2709,32 +2709,39 @@ index a1058c6..93ddcb3 100644
 +  </li>
  </ul>
 diff --git a/catalog/views/default/templates/recordView/summary.html b/catalog/views/default/templates/recordView/summary.html
-index 5cd12ab..3b6e978 100644
+index 5cd12ab..c8f836b 100644
 --- a/catalog/views/default/templates/recordView/summary.html
 +++ b/catalog/views/default/templates/recordView/summary.html
-@@ -62,6 +62,23 @@
+@@ -62,6 +62,30 @@
        </div>
      </div>
    </div>
 +
-+  <div
-+    class="gn-margin-bottom flex-row"
-+    data-ng-if="mdView.current.record.resourceType[0] == 'service'">
-+    <i class="fa fa-fw fa-server" />
-+    <span>Typ: Dienst</span>
-+  </div>
++</div>
 +
-+  <div
++<div
++  class="gn-margin-bottom flex-row"
++  data-ng-if="mdView.current.record.resourceType[0] == 'service' && mdView.current.record.serviceType == 'download'">
++  <i class="fa fa-fw fa-server" />
++  <span>Typ: Downloaddienst</span>
++</div>
++
++<div
++  class="gn-margin-bottom flex-row"
++  data-ng-if="mdView.current.record.resourceType[0] == 'service' && mdView.current.record.serviceType == 'view'">
++  <i class="fa fa-fw fa-server" />
++  <span>Typ: Darstellungsdienst</span>
++</div>
++
++<div
 +  class="gn-margin-bottom flex-row"
 +  data-ng-if="mdView.current.record.resourceType[0] != 'service'">
-+    <i class="fa fa-fw fa-database" />
-+    <h3>Typ: Daten</h3>
-+  </div>
-+
++  <i class="fa fa-fw fa-database" />
++  <h3>Typ: Daten</h3>
 +</div>
 +
  </section>
-
+ 
  <div
 diff --git a/catalog/views/default/templates/results.html b/catalog/views/default/templates/results.html
 index 5fbef27..cd8fc4a 100644
@@ -2750,7 +2757,7 @@ index 5fbef27..cd8fc4a 100644
 +<div data-ng-search-form=""
 +     data-runSearch="true">
 +  <div data-ng-include="'../../catalog/views/default/templates/searchForm.html'"></div>
-
+ 
 +  <div gn-grid-related-query="searchResults.records"></div>
    <div class="row gn-row-results">
 -    <div class="col-sm-offset-6" data-gn-index-error-panel=""></div>
@@ -2841,7 +2848,7 @@ index 5fbef27..cd8fc4a 100644
 -              data-results="searchResults"
 -            ></div>
 -          </div>
-
+ 
 -          <div class="col-xs-12 col-sm-6 text-center">
 -            <div
 -              class=""
@@ -2872,7 +2879,7 @@ index 5fbef27..cd8fc4a 100644
 +          <div data-gn-selection-widget=""
 +                data-results="searchResults"></div>
 +        </div>
-
+ 
 -          <div class="col-xs-6 col-sm-3 gn-nopadding-right text-right navbar-right">
 -            <div
 +        <div class="col-xs-6 col-sm-3"
@@ -2912,7 +2919,7 @@ index 5fbef27..cd8fc4a 100644
 -              <span data-translate="">zarooResult</span>
 -            </div>
 +    </div>
-
+ 
 -            <div
 -              data-ng-show="searchResults.records.length > 0"
 -              data-gn-results-container=""
@@ -2971,7 +2978,7 @@ index 5fbef27..cd8fc4a 100644
      </div>
 +    <br>
 +
-
+ 
 -    <div ng-if="searchMapPlacement === 'results'" class="hidden-print">
 -      <div
 -        data-gn-map-field="searchObj.searchMap"
