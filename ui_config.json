@@ -1,6 +1,6 @@
 {
   "langDetector": {
-    "fromHtmlTag": false,
+    "fromHtmlTag": {},
     "regexp": "^(?:/.+)?/.+/([a-z]{2,3})/.+",
     "default": "eng"
   },
