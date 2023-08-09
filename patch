@@ -180,6 +180,45 @@ index 74ea7ce..4a527f6 100644
 +  });
 +
  })();
+diff --git a/catalog/locales/de-v4.json b/catalog/locales/de-v4.json
+index 991dbfd..e09dd8c 100644
+--- a/catalog/locales/de-v4.json
++++ b/catalog/locales/de-v4.json
+@@ -92,7 +92,7 @@
+   "isHarvested-true": "Geharvested",
+   "isHarvested-false": "Lokal",
+   "deleteRecordConfirm": "Wollen Sie wirklich '{{resourceTitle}}' entfernen?",
+-  "range-relation-intersects": "Intersects",
++  "range-relation-intersects": "Schneidet",
+   "range-relation-within": "vollständig innerhalb",
+   "range-relation-contains": "Enthält",
+   "documentStandard": "Output-Schema",
+@@ -171,8 +171,8 @@
+   "searchInvalidResponse": "Die Abfrage gab eine ungültige Antwort zurück. Überprüfen Sie die Konsole für Details.",
+   "exactMatch": "Genaue Übereinstimmung",
+   "exactMatch-help": "Genaue Übereinstimmung bedeutet, dass bei Suchbegriffen \"\" hinzugefügt werden.",
+-  "titleOnly": "Search in title only",
+-  "titleOnly-help": "Search in title only.",
++  "titleOnly": "Nur im Titel suchen",
++  "titleOnly-help": "Nur im Titel suchen",
+   "gnbbox": "Geographical area",
+   "featuresInMapExtent": "Features in current map extent only",
+   "heatmapAvailableForPointOnly": "Heatmap only supported for point layer.",
+@@ -294,10 +294,10 @@
+   "uiRestorePrevious": "Das zuletzt Gespeicherte wiederherstellen",
+   "onlyMyRecord": "Nur meine Metadaten",
+   "searchWithLang": "Languages",
+-  "searchAllLanguages-help": "Define which language is giving priorities to some records.",
+-  "searchInAllLanguages": "in all languages",
+-  "searchInUILanguage": "in UI language",
+-  "searchInDetectedLanguage": "in detected language",
++  "searchAllLanguages-help": "Definieren, welche Sprache Priorität hat",
++  "searchInAllLanguages": "in allen Sprachen",
++  "searchInUILanguage": "in der Sprache der Oberfläche",
++  "searchInDetectedLanguage": "in erkannter Sprache",
+   "forceALanguage": "in language:",
+   "cite.dataset": "Cite dataset",
+   "cite.format.html": "Html",
 diff --git a/catalog/style/gn.less b/catalog/style/gn.less
 index cd7cb38..3939713 100644
 --- a/catalog/style/gn.less
