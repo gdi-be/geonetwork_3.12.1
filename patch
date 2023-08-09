@@ -192,7 +192,7 @@ index 74ea7ce..4a527f6 100644
 +
  })();
 diff --git a/catalog/style/gn.less b/catalog/style/gn.less
-index cd7cb38..2feb7d9 100644
+index cd7cb38..270c981 100644
 --- a/catalog/style/gn.less
 +++ b/catalog/style/gn.less
 @@ -241,7 +241,10 @@ a {
@@ -207,11 +207,25 @@ index cd7cb38..2feb7d9 100644
    background-color: #fff;
    img {
      max-width: 100%;
+@@ -1695,3 +1698,13 @@ html {
+   top: 1.9em;
+   color: green;
+ }
++
++footer.navbar.navbar-default.gn-bottom-bar.ng-scope {
++  background: #545454;
++  color: white !important;
++}
++
++footer.navbar.navbar-default.gn-bottom-bar.ng-scope a {
++  color: white !important;
++}
++
 diff --git a/catalog/views/default/templates/footer.html b/catalog/views/default/templates/footer.html
-index a1058c6..a81d7a8 100644
+index a1058c6..a3039f9 100644
 --- a/catalog/views/default/templates/footer.html
 +++ b/catalog/views/default/templates/footer.html
-@@ -1,104 +1,113 @@
+@@ -1,104 +1,32 @@
 -<ul class="nav navbar-nav" ng-show="::getApplicationInfoVisible()">
 -  <li class="navbar-text">
 -    <span
@@ -235,29 +249,93 @@ index a1058c6..a81d7a8 100644
 -  <li>
 -    <a href="../../doc/api" title="{{'learnTheApi' | translate}}">API</a>
 -  </li>
+-</ul>
+-<ul
+-  class="nav navbar-nav"
+-  gn-static-pages-list-viewer
+-  data-section="footer"
+-  data-language="{{lang}}"
+-></ul>
+-<ul class="nav navbar-nav" ng-show="getSocialLinksVisible()">
+-  <li class="navbar-text">
+-    <span data-translate="">shareOn</span>
+-  </li>
+-  <li>
+-    <a
+-      href="https://twitter.com/share?url={{socialMediaLink | encodeURIComponent}}"
+-      target="_blank"
+-      title="{{'shareOnTwitter' | translate}}"
+-      aria-label="{{'shareOnTwitter' | translate}}"
+-    >
+-      <span class="fa fa-twitter"></span>
+-    </a>
+-  </li>
+-  <li>
+-    <a
+-      href="https://www.facebook.com/sharer.php?u={{socialMediaLink | encodeURIComponent}}"
+-      target="_blank"
+-      title="{{'shareOnFacebook' | translate}}"
+-      aria-label="{{'shareOnFacebook' | translate}}"
+-    >
+-      <span class="fa fa-facebook"></span>
+-    </a>
+-  </li>
+-  <li>
+-    <a
+-      href="http://www.linkedin.com/shareArticle?mini=true&amp;url={{socialMediaLink | encodeURIComponent}}"
+-      target="_blank"
+-      title="{{'shareOnLinkedIn' | translate}}"
+-      aria-label="{{'shareOnLinkedIn' | translate}}"
+-    >
+-      <span class="fa fa-linkedin"></span>
+-    </a>
+-  </li>
+-  <li>
+-    <a
+-      href="mailto:?subject={{info.site.name}}&amp;body={{socialMediaLink | encodeURIComponent}}"
+-      target="_blank"
+-      title="{{'shareByEmail' | translate}}"
+-      aria-label="{{'shareByEmail' | translate}}"
+-    >
+-      <span class="fa fa-envelope-o"></span>
+-    </a>
+-  </li>
+-  <li>
+-    <a
+-      href=""
+-      data-ng-click="getPermalink('', socialMediaLink)"
+-      title="{{'permalink' | translate}}"
+-      aria-label="{{'permalink' | translate}}"
+-    >
+-      <span class="fa fa-fw fa-link"></span
+-    ></a>
+-  </li>
+-  <li
+-    data-ng-if="info['microservices/enabled'] === true"
+-    data-ng-repeat="rssFeed in rssFeeds"
+-  >
+-    <a
+-      href="../../api/collections/main/items?{{rssFeed.url}}"
+-      title="{{rssFeed.label | translate}}"
+-      aria-label="{{rssFeed.label | translate}}"
+-    >
+-      <span class="fa fa-rss" />
+-    </a>
+-  </li>
+-  <!--<li>
+-    <a href="rss.search?sortBy=changeDate&georss=simplepoint"
+-       title="{{'rssFeed' | translate}}"
+-       aria-label="{{'rssFeed' | translate}}">
+-      <span class="fa fa-rss"/>
+-    </a>
+-  </li>-->
 +<ul class="nav navbar-nav">
-+
-+	<!--
-+	<li class="navbar-text">
-+		<span data-translate=""
-+		data-translate-values="{platform: '{{info['system/platform/name']}}', version: '{{info['system/platform/version']}}', subversion: '{{info['system/platform/subVersion']}}'}">
-+		versionDetails</span>
-+	</li>
-+	-->
 +	<li>
 +		<a href="https://www.berlin.de/sen/sbw/stadtdaten/geoportal/" target="_blank">
 +			<span class="fa fa-fw fa-info"></span>
 +			<span data-translate="">Geoportal Berlin</span>
 +		</a>
 +	</li>
-+	<!-- TODO: Hilfeseiten erstellen und verlinken
-+	<li class="hidden-sm">
-+		<a href="http://fb30:81/gdibe-wiki/index.php?title=Geonetwork:FAQ" target="_blank">
-+			<span class="fa fa-fw fa-question"></span>
-+			<span data-translate="">Hilfe</span>
-+		</a>
-+	</li>
-+	-->
 +	<li class="hidden-sm">
 +		<a href="https://www.berlin.de/sen/sbw/stadtdaten/geoportal/geoportal-daten-und-dienste/datenschutz/" target="_blank">
 +			<span class="fa fa-fw fa-shield"></span>
@@ -282,126 +360,6 @@ index a1058c6..a81d7a8 100644
 +			<span data-translate="">Impressum</span>
 +		</a>
 +	</li>
-+	<!--<li class="hidden-sm">
-+		<a href="https://github.com/geonetwork/core-geonetwork">
-+			<span class="fa fa-fw fa-github"></span>
-+			<span data-translate="">github</span>
-+		</a>
-+	</li>-->
-+	<!--<li>
-+		<a href="../../doc/api" title="{{'learnTheApi' | translate}}">
-+		<span class="fa fa-fw fa-cog"></span>
-+		<span data-translate="">API</span>
-+		</a>
-+	</li>-->
-+	<li gn-static-pages-list-viewer data-section="footer" data-language="{{lang}}" />
- </ul>
--<ul
--  class="nav navbar-nav"
--  gn-static-pages-list-viewer
--  data-section="footer"
--  data-language="{{lang}}"
--></ul>
-+
- <ul class="nav navbar-nav" ng-show="getSocialLinksVisible()">
-   <li class="navbar-text">
-     <span data-translate="">shareOn</span>
-   </li>
-   <li>
--    <a
--      href="https://twitter.com/share?url={{socialMediaLink | encodeURIComponent}}"
--      target="_blank"
--      title="{{'shareOnTwitter' | translate}}"
--      aria-label="{{'shareOnTwitter' | translate}}"
--    >
--      <span class="fa fa-twitter"></span>
-+    <a href="https://twitter.com/share?url={{socialMediaLink | encodeURIComponent}}"
-+       target="_blank"
-+       title="{{'shareOnTwitter' | translate}}"
-+       aria-label="{{'shareOnTwitter' | translate}}">
-+       <span class="fa fa-twitter"></span>
-     </a>
-   </li>
-   <li>
--    <a
--      href="https://www.facebook.com/sharer.php?u={{socialMediaLink | encodeURIComponent}}"
--      target="_blank"
--      title="{{'shareOnFacebook' | translate}}"
--      aria-label="{{'shareOnFacebook' | translate}}"
--    >
--      <span class="fa fa-facebook"></span>
-+    <a href="https://www.facebook.com/sharer.php?u={{socialMediaLink | encodeURIComponent}}"
-+       target="_blank"
-+       title="{{'shareOnFacebook' | translate}}"
-+       aria-label="{{'shareOnFacebook' | translate}}">
-+       <span class="fa fa-facebook"></span>
-     </a>
-   </li>
-   <li>
--    <a
--      href="http://www.linkedin.com/shareArticle?mini=true&amp;url={{socialMediaLink | encodeURIComponent}}"
--      target="_blank"
--      title="{{'shareOnLinkedIn' | translate}}"
--      aria-label="{{'shareOnLinkedIn' | translate}}"
--    >
-+    <a href="http://www.linkedin.com/shareArticle?mini=true&amp;url={{socialMediaLink | encodeURIComponent}}"
-+       target="_blank"
-+       title="{{'shareOnLinkedIn' | translate}}"
-+       aria-label="{{'shareOnLinkedIn' | translate}}">
-       <span class="fa fa-linkedin"></span>
-     </a>
-   </li>
-   <li>
--    <a
--      href="mailto:?subject={{info.site.name}}&amp;body={{socialMediaLink | encodeURIComponent}}"
--      target="_blank"
--      title="{{'shareByEmail' | translate}}"
--      aria-label="{{'shareByEmail' | translate}}"
--    >
--      <span class="fa fa-envelope-o"></span>
-+    <a href="mailto:?subject={{info.site.name}}&amp;body={{socialMediaLink | encodeURIComponent}}"
-+       target="_blank"
-+       title="{{'shareByEmail' | translate}}"
-+       aria-label="{{'shareByEmail' | translate}}">
-+       <span class="fa fa-envelope-o"></span>
-     </a>
-   </li>
-   <li>
--    <a
--      href=""
--      data-ng-click="getPermalink('', socialMediaLink)"
--      title="{{'permalink' | translate}}"
--      aria-label="{{'permalink' | translate}}"
--    >
--      <span class="fa fa-fw fa-link"></span
--    ></a>
--  </li>
--  <li
--    data-ng-if="info['microservices/enabled'] === true"
--    data-ng-repeat="rssFeed in rssFeeds"
--  >
--    <a
--      href="../../api/collections/main/items?{{rssFeed.url}}"
--      title="{{rssFeed.label | translate}}"
--      aria-label="{{rssFeed.label | translate}}"
--    >
--      <span class="fa fa-rss" />
--    </a>
-+    <a href=""
-+       data-ng-click="getPermalink('', socialMediaLink)"
-+       title="{{'permalink' | translate}}"
-+       aria-label="{{'permalink' | translate}}">
-+      <span class="fa fa-fw fa-link"></span></a>
-   </li>
--  <!--<li>
-+  <li>
-     <a href="rss.search?sortBy=changeDate&georss=simplepoint"
-        title="{{'rssFeed' | translate}}"
-        aria-label="{{'rssFeed' | translate}}">
-       <span class="fa fa-rss"/>
-     </a>
--  </li>-->
-+  </li>
  </ul>
 diff --git a/catalog/views/default/templates/recordView/title.html b/catalog/views/default/templates/recordView/title.html
 index 5d4ac0c..f120379 100644
