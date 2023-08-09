@@ -191,6 +191,22 @@ index 74ea7ce..4a527f6 100644
 +  });
 +
  })();
+diff --git a/catalog/style/gn.less b/catalog/style/gn.less
+index cd7cb38..2feb7d9 100644
+--- a/catalog/style/gn.less
++++ b/catalog/style/gn.less
+@@ -241,7 +241,10 @@ a {
+   cursor: pointer;
+ }
+ .gn-img-modal {
+-  width: 95vw;
++  display: flex;
++  justify-content: space-evenly;
++  flex-direction: row;
++  width: fit-content;
+   background-color: #fff;
+   img {
+     max-width: 100%;
 diff --git a/catalog/views/default/templates/footer.html b/catalog/views/default/templates/footer.html
 index a1058c6..a81d7a8 100644
 --- a/catalog/views/default/templates/footer.html
