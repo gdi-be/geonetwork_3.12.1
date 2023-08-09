@@ -181,7 +181,7 @@ index 74ea7ce..4a527f6 100644
 +
  })();
 diff --git a/catalog/style/gn.less b/catalog/style/gn.less
-index cd7cb38..5c6c4e5 100644
+index cd7cb38..3939713 100644
 --- a/catalog/style/gn.less
 +++ b/catalog/style/gn.less
 @@ -241,7 +241,10 @@ a {
@@ -196,7 +196,7 @@ index cd7cb38..5c6c4e5 100644
    background-color: #fff;
    img {
      max-width: 100%;
-@@ -1695,3 +1698,18 @@ html {
+@@ -1695,3 +1698,20 @@ html {
    top: 1.9em;
    color: green;
  }
@@ -211,8 +211,10 @@ index cd7cb38..5c6c4e5 100644
 +}
 +
 +.gn-search-map,
-+.gn-minimap-toggle {
-+  display: none;
++.gn-minimap-toggle,
++.gn-md-select,
++[data-gn-selection-widget] {
++  display: none !important;
 +}
 +
 diff --git a/catalog/views/default/templates/recordView/title.html b/catalog/views/default/templates/recordView/title.html
