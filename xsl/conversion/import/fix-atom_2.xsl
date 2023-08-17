@@ -20,6 +20,9 @@
               <gmd:protocol>
                 <gco:CharacterString>INSPIRE Atom</gco:CharacterString>
               </gmd:protocol>
+              <gmd:name>
+                <gco:CharacterString><value-of select="//gmd:identificationInfo/srv:SV_ServiceIdentification/gmd:citation/gmd:CI_Citation/gmd:title/gco:CharacterString"/> - Atom Download-Dienst</gco:CharacterString>
+              </gmd:name>
               <gmd:function>
                 <gmd:CI_OnLineFunctionCode
                   codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#CI_OnLineFunctionCode"
