@@ -90,6 +90,74 @@ index 0e3d4ef..4a9e253 100644
  
  # Set to false to enable the services to draw map extents (region.getmap and {metadatauuid}/extents.png) accepting
  # urls for map services to provide the background layers. Otherwise the only allowed options are from the settings
+diff --git a/WEB-INF/data/config/encryptor.properties b/WEB-INF/data/config/encryptor.properties
+index 5d3b1e7..687232b 100644
+--- a/WEB-INF/data/config/encryptor.properties
++++ b/WEB-INF/data/config/encryptor.properties
+@@ -1,3 +1,5 @@
++# Generated at 2023-09-02T13:01:21.512Z.
++
+ # Password encryptor configuration
+ encryptor.algorithm = PBEWithMD5AndDES
+-encryptor.password =
++encryptor.password =v0fsC4CoMx
+diff --git a/WEB-INF/data/config/schema_plugins/iso19139/loc/ger/codelists.xml b/WEB-INF/data/config/schema_plugins/iso19139/loc/ger/codelists.xml
+index bb34ecd..38c9e35 100644
+--- a/WEB-INF/data/config/schema_plugins/iso19139/loc/ger/codelists.xml
++++ b/WEB-INF/data/config/schema_plugins/iso19139/loc/ger/codelists.xml
+@@ -1543,7 +1543,14 @@
+     <!-- - - - - - - - - - - - - - - - - - - - - - - - - -->
+     <entry>
+       <code>service</code>
+-      <label>Service</label>
++      <label>Dienst</label>
++      <description>Information gilt für einen Dienst, welcher von einem Anbieter über definierte
++        Schnittstellen einem Dienstnutzer zur Verfügung gestellt wird
++      </description>
++    </entry>
++    <entry>
++      <code>application</code>
++      <label>Anwendung</label>
+       <description>Information gilt für einen Dienst, welcher von einem Anbieter über definierte
+         Schnittstellen einem Dienstnutzer zur Verfügung gestellt wird
+       </description>
+@@ -1605,12 +1612,19 @@
+             displayIf="/ancestor::node()[name()='gmd:MD_Metadata']/gmd:identificationInfo/srv:SV_ServiceIdentification">
+     <entry>
+       <code>service</code>
+-      <label>Service</label>
++      <label>Dienst</label>
+       <description>Information applies to a capability which a service provider entity makes
+         available to a service user entity through a set of interfaces that define a behaviour,
+         such as a use case
+       </description>
+     </entry>
++    <entry>
++      <code>application</code>
++      <label>Anwendung</label>
++      <description>Information gilt für einen Dienst, welcher von einem Anbieter über definierte
++        Schnittstellen einem Dienstnutzer zur Verfügung gestellt wird
++      </description>
++    </entry>
+   </codelist>
+   <!-- ==================================================== -->
+   <codelist name="gmd:MD_SpatialRepresentationTypeCode">
+@@ -1989,7 +2003,14 @@
+     <!-- - - - - - - - - - - - - - - - - - - - - - - - - -->
+     <entry>
+       <code>service</code>
+-      <label>Service</label>
++      <label>Dienst</label>
++      <description>Information gilt für einen Dienst, welcher von einem Anbieter über definierte
++        Schnittstellen einem Dienstnutzer zur Verfügung gestellt wird
++      </description>
++    </entry>
++    <entry>
++      <code>application</code>
++      <label>Anwendung</label>
+       <description>Information gilt für einen Dienst, welcher von einem Anbieter über definierte
+         Schnittstellen einem Dienstnutzer zur Verfügung gestellt wird
+       </description>
 diff --git a/WEB-INF/web.xml b/WEB-INF/web.xml
 index b74d2d3..2c9b97c 100644
 --- a/WEB-INF/web.xml
@@ -112,6 +180,20 @@ index b74d2d3..2c9b97c 100644
      </init-param>
      <init-param>
        <param-name>log</param-name>
+diff --git a/catalog/components/elasticsearch/directives/partials/facet.html b/catalog/components/elasticsearch/directives/partials/facet.html
+index f9e101a..d22cdde 100644
+--- a/catalog/components/elasticsearch/directives/partials/facet.html
++++ b/catalog/components/elasticsearch/directives/partials/facet.html
+@@ -34,6 +34,9 @@
+         {{::ctrl.item.value | facetTranslator: (ctrl.facet.meta && ctrl.facet.meta.field)
+         || ctrl.facet.key | capitalize}}
+       </span>
++	<script type='text/javascript'>
++		console.log('{{::ctrl.item.value | facetTranslator: (ctrl.facet.meta && ctrl.facet.meta.field) || ctrl.facet.key | capitalize}}');
++	</script>
+       <span
+         ng-if="ctrl.item.count"
+         class="gn-facet-count flex-no-shrink gn-facet-count-{{ctrl.item.count}}"
 diff --git a/catalog/components/search/resultsview/partials/viewtemplates/grid.html b/catalog/components/search/resultsview/partials/viewtemplates/grid.html
 index c413513..e014a7c 100644
 --- a/catalog/components/search/resultsview/partials/viewtemplates/grid.html
@@ -181,7 +263,7 @@ index 74ea7ce..4a527f6 100644
 +
  })();
 diff --git a/catalog/locales/de-v4.json b/catalog/locales/de-v4.json
-index 991dbfd..e09dd8c 100644
+index 991dbfd..93f8e49 100644
 --- a/catalog/locales/de-v4.json
 +++ b/catalog/locales/de-v4.json
 @@ -92,7 +92,7 @@
@@ -193,6 +275,17 @@ index 991dbfd..e09dd8c 100644
    "range-relation-within": "vollständig innerhalb",
    "range-relation-contains": "Enthält",
    "documentStandard": "Output-Schema",
+@@ -105,8 +105,8 @@
+   "facet-cl_hierarchyLevel": "Datensatztyp",
+   "facet-resourceType": "Datensatztyp",
+   "facet-cl_resourceScope": "Datensatztyp",
+-  "facet-cl_spatialRepresentationType": "Räumlicher Darstellungstyp",
+-  "facet-availableInServices": "Verfügbar in",
++  "facet-cl_spatialRepresentationType": "Datentyp",
++  "facet-availableInServices": "Art des Dienstes",
+   "availableInServices-availableInDownloadService": "Download-Dienste",
+   "availableInServices-availableInViewService": "Darstellungsdienst",
+   "facet-th_gemet_tree": "Umwelt-Tags",
 @@ -171,8 +171,8 @@
    "searchInvalidResponse": "Die Abfrage gab eine ungültige Antwort zurück. Überprüfen Sie die Konsole für Details.",
    "exactMatch": "Genaue Übereinstimmung",
@@ -256,6 +349,146 @@ index cd7cb38..3939713 100644
 +  display: none !important;
 +}
 +
+diff --git a/catalog/views/default/templates/footer.html b/catalog/views/default/templates/footer.html
+index a1058c6..a3039f9 100644
+--- a/catalog/views/default/templates/footer.html
++++ b/catalog/views/default/templates/footer.html
+@@ -1,104 +1,32 @@
+-<ul class="nav navbar-nav" ng-show="::getApplicationInfoVisible()">
+-  <li class="navbar-text">
+-    <span
+-      data-translate=""
+-      data-translate-values="{platform: '{{info['system/platform/name']}}', version: '{{info['system/platform/version']}}', subversion: '{{info['system/platform/subVersion']}}'}"
+-    >
+-      versionDetails</span
+-    >
+-  </li>
+-  <li>
+-    <a href="http://geonetwork-opensource.org/">
+-      <span data-translate="">about</span>
+-    </a>
+-  </li>
+-  <li class="hidden-sm">
+-    <a href="https://github.com/geonetwork/core-geonetwork">
+-      <span class="fa fa-fw fa-github"></span>
+-      <span data-translate="">github</span>
+-    </a>
+-  </li>
+-  <li>
+-    <a href="../../doc/api" title="{{'learnTheApi' | translate}}">API</a>
+-  </li>
+-</ul>
+-<ul
+-  class="nav navbar-nav"
+-  gn-static-pages-list-viewer
+-  data-section="footer"
+-  data-language="{{lang}}"
+-></ul>
+-<ul class="nav navbar-nav" ng-show="getSocialLinksVisible()">
+-  <li class="navbar-text">
+-    <span data-translate="">shareOn</span>
+-  </li>
+-  <li>
+-    <a
+-      href="https://twitter.com/share?url={{socialMediaLink | encodeURIComponent}}"
+-      target="_blank"
+-      title="{{'shareOnTwitter' | translate}}"
+-      aria-label="{{'shareOnTwitter' | translate}}"
+-    >
+-      <span class="fa fa-twitter"></span>
+-    </a>
+-  </li>
+-  <li>
+-    <a
+-      href="https://www.facebook.com/sharer.php?u={{socialMediaLink | encodeURIComponent}}"
+-      target="_blank"
+-      title="{{'shareOnFacebook' | translate}}"
+-      aria-label="{{'shareOnFacebook' | translate}}"
+-    >
+-      <span class="fa fa-facebook"></span>
+-    </a>
+-  </li>
+-  <li>
+-    <a
+-      href="http://www.linkedin.com/shareArticle?mini=true&amp;url={{socialMediaLink | encodeURIComponent}}"
+-      target="_blank"
+-      title="{{'shareOnLinkedIn' | translate}}"
+-      aria-label="{{'shareOnLinkedIn' | translate}}"
+-    >
+-      <span class="fa fa-linkedin"></span>
+-    </a>
+-  </li>
+-  <li>
+-    <a
+-      href="mailto:?subject={{info.site.name}}&amp;body={{socialMediaLink | encodeURIComponent}}"
+-      target="_blank"
+-      title="{{'shareByEmail' | translate}}"
+-      aria-label="{{'shareByEmail' | translate}}"
+-    >
+-      <span class="fa fa-envelope-o"></span>
+-    </a>
+-  </li>
+-  <li>
+-    <a
+-      href=""
+-      data-ng-click="getPermalink('', socialMediaLink)"
+-      title="{{'permalink' | translate}}"
+-      aria-label="{{'permalink' | translate}}"
+-    >
+-      <span class="fa fa-fw fa-link"></span
+-    ></a>
+-  </li>
+-  <li
+-    data-ng-if="info['microservices/enabled'] === true"
+-    data-ng-repeat="rssFeed in rssFeeds"
+-  >
+-    <a
+-      href="../../api/collections/main/items?{{rssFeed.url}}"
+-      title="{{rssFeed.label | translate}}"
+-      aria-label="{{rssFeed.label | translate}}"
+-    >
+-      <span class="fa fa-rss" />
+-    </a>
+-  </li>
+-  <!--<li>
+-    <a href="rss.search?sortBy=changeDate&georss=simplepoint"
+-       title="{{'rssFeed' | translate}}"
+-       aria-label="{{'rssFeed' | translate}}">
+-      <span class="fa fa-rss"/>
+-    </a>
+-  </li>-->
++<ul class="nav navbar-nav">
++	<li>
++		<a href="https://www.berlin.de/sen/sbw/stadtdaten/geoportal/" target="_blank">
++			<span class="fa fa-fw fa-info"></span>
++			<span data-translate="">Geoportal Berlin</span>
++		</a>
++	</li>
++	<li class="hidden-sm">
++		<a href="https://www.berlin.de/sen/sbw/stadtdaten/geoportal/geoportal-daten-und-dienste/datenschutz/" target="_blank">
++			<span class="fa fa-fw fa-shield"></span>
++			<span data-translate="">Datenschutz</span>
++		</a>
++	</li>
++	<li class="hidden-sm">
++		<a href="https://www.berlin.de/sen/sbw/stadtdaten/geoportal/geoportal-daten-und-dienste/barrierefreiheitserklaerung/" target="_blank">
++			<span class="fa fa-fw fa-arrow-circle-o-up"></span>
++			<span data-translate="">Barrierefreiheit</span>
++		</a>
++	</li>
++	<li class="hidden-sm">
++		<a href="mailto:fisbroker@senstadt.berlin.de?subject=Geodatensuche">
++			<span class="fa fa-fw fa-envelope"></span>
++			<span data-translate="">Kontakt</span>
++		</a>
++	</li>
++	<li class="hidden-sm">
++		<a href="https://www.berlin.de/sen/sbw/ueber-uns/artikel.1246136.php" target="_blank">
++			<span class="fa fa-fw fa-university"></span>
++			<span data-translate="">Impressum</span>
++		</a>
++	</li>
+ </ul>
 diff --git a/catalog/views/default/templates/recordView/title.html b/catalog/views/default/templates/recordView/title.html
 index 5d4ac0c..f120379 100644
 --- a/catalog/views/default/templates/recordView/title.html
@@ -271,3 +504,20 @@ index 5d4ac0c..f120379 100644
  
      {{mdView.current.record.resourceTitle}}
  
+diff --git a/loc/ger/json/formatter.json b/loc/ger/json/formatter.json
+index 6ce4ad3..b9904b7 100644
+--- a/loc/ger/json/formatter.json
++++ b/loc/ger/json/formatter.json
+@@ -7,8 +7,10 @@
+     "overview": "Überblick",
+     "parent": "Eltern",
+     "source-link": "Quellen",
++    "service-link": "Dienst",
++    "service": "Dienst",
+     "testString": "Dieser dient für Tests, bitte nicht löschen!",
+     "xml": "XML",
+     "uncategorizedKeywords":"Keine Kategorie",
+     "related-link": "Relations"
+-}
+\ No newline at end of file
++}
