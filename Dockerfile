@@ -10,6 +10,8 @@ COPY patch /tmp/patch
 RUN patch -p1 < /tmp/patch
 COPY overrides/footer.html /var/lib/jetty/webapps/geonetwork/catalog/views/default/templates/footer.html
 COPY overrides/top-toolbar.html /var/lib/jetty/webapps/geonetwork/catalog/templates/top-toolbar.html
+COPY overrides/top-toolbar.html /var/lib/jetty/webapps/geonetwork/catalog/components/toolbar/partials/top-toolbar.html
+COPY overrides/logo.png /var/lib/jetty/webapps/geonetwork/catalog/views/default/images/
 RUN rm -rf /var/lib/jetty/webapps/geonetwork/catalog/templates/WEB-INF/data/wro4j-cache.mv.db
 WORKDIR /var/lib/jetty
 

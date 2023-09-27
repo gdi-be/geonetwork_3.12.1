@@ -180,20 +180,6 @@ index b74d2d3..2c9b97c 100644
      </init-param>
      <init-param>
        <param-name>log</param-name>
-diff --git a/catalog/components/elasticsearch/directives/partials/facet.html b/catalog/components/elasticsearch/directives/partials/facet.html
-index f9e101a..d22cdde 100644
---- a/catalog/components/elasticsearch/directives/partials/facet.html
-+++ b/catalog/components/elasticsearch/directives/partials/facet.html
-@@ -34,6 +34,9 @@
-         {{::ctrl.item.value | facetTranslator: (ctrl.facet.meta && ctrl.facet.meta.field)
-         || ctrl.facet.key | capitalize}}
-       </span>
-+	<script type='text/javascript'>
-+		console.log('{{::ctrl.item.value | facetTranslator: (ctrl.facet.meta && ctrl.facet.meta.field) || ctrl.facet.key | capitalize}}');
-+	</script>
-       <span
-         ng-if="ctrl.item.count"
-         class="gn-facet-count flex-no-shrink gn-facet-count-{{ctrl.item.count}}"
 diff --git a/catalog/components/search/resultsview/partials/viewtemplates/grid.html b/catalog/components/search/resultsview/partials/viewtemplates/grid.html
 index c413513..e014a7c 100644
 --- a/catalog/components/search/resultsview/partials/viewtemplates/grid.html
@@ -313,7 +299,7 @@ index 991dbfd..93f8e49 100644
    "cite.dataset": "Cite dataset",
    "cite.format.html": "Html",
 diff --git a/catalog/style/gn.less b/catalog/style/gn.less
-index cd7cb38..3939713 100644
+index cd7cb38..8f0d77f 100644
 --- a/catalog/style/gn.less
 +++ b/catalog/style/gn.less
 @@ -241,7 +241,10 @@ a {
@@ -328,7 +314,7 @@ index cd7cb38..3939713 100644
    background-color: #fff;
    img {
      max-width: 100%;
-@@ -1695,3 +1698,20 @@ html {
+@@ -1695,3 +1698,24 @@ html {
    top: 1.9em;
    color: green;
  }
@@ -349,146 +335,10 @@ index cd7cb38..3939713 100644
 +  display: none !important;
 +}
 +
-diff --git a/catalog/views/default/templates/footer.html b/catalog/views/default/templates/footer.html
-index a1058c6..a3039f9 100644
---- a/catalog/views/default/templates/footer.html
-+++ b/catalog/views/default/templates/footer.html
-@@ -1,104 +1,32 @@
--<ul class="nav navbar-nav" ng-show="::getApplicationInfoVisible()">
--  <li class="navbar-text">
--    <span
--      data-translate=""
--      data-translate-values="{platform: '{{info['system/platform/name']}}', version: '{{info['system/platform/version']}}', subversion: '{{info['system/platform/subVersion']}}'}"
--    >
--      versionDetails</span
--    >
--  </li>
--  <li>
--    <a href="http://geonetwork-opensource.org/">
--      <span data-translate="">about</span>
--    </a>
--  </li>
--  <li class="hidden-sm">
--    <a href="https://github.com/geonetwork/core-geonetwork">
--      <span class="fa fa-fw fa-github"></span>
--      <span data-translate="">github</span>
--    </a>
--  </li>
--  <li>
--    <a href="../../doc/api" title="{{'learnTheApi' | translate}}">API</a>
--  </li>
--</ul>
--<ul
--  class="nav navbar-nav"
--  gn-static-pages-list-viewer
--  data-section="footer"
--  data-language="{{lang}}"
--></ul>
--<ul class="nav navbar-nav" ng-show="getSocialLinksVisible()">
--  <li class="navbar-text">
--    <span data-translate="">shareOn</span>
--  </li>
--  <li>
--    <a
--      href="https://twitter.com/share?url={{socialMediaLink | encodeURIComponent}}"
--      target="_blank"
--      title="{{'shareOnTwitter' | translate}}"
--      aria-label="{{'shareOnTwitter' | translate}}"
--    >
--      <span class="fa fa-twitter"></span>
--    </a>
--  </li>
--  <li>
--    <a
--      href="https://www.facebook.com/sharer.php?u={{socialMediaLink | encodeURIComponent}}"
--      target="_blank"
--      title="{{'shareOnFacebook' | translate}}"
--      aria-label="{{'shareOnFacebook' | translate}}"
--    >
--      <span class="fa fa-facebook"></span>
--    </a>
--  </li>
--  <li>
--    <a
--      href="http://www.linkedin.com/shareArticle?mini=true&amp;url={{socialMediaLink | encodeURIComponent}}"
--      target="_blank"
--      title="{{'shareOnLinkedIn' | translate}}"
--      aria-label="{{'shareOnLinkedIn' | translate}}"
--    >
--      <span class="fa fa-linkedin"></span>
--    </a>
--  </li>
--  <li>
--    <a
--      href="mailto:?subject={{info.site.name}}&amp;body={{socialMediaLink | encodeURIComponent}}"
--      target="_blank"
--      title="{{'shareByEmail' | translate}}"
--      aria-label="{{'shareByEmail' | translate}}"
--    >
--      <span class="fa fa-envelope-o"></span>
--    </a>
--  </li>
--  <li>
--    <a
--      href=""
--      data-ng-click="getPermalink('', socialMediaLink)"
--      title="{{'permalink' | translate}}"
--      aria-label="{{'permalink' | translate}}"
--    >
--      <span class="fa fa-fw fa-link"></span
--    ></a>
--  </li>
--  <li
--    data-ng-if="info['microservices/enabled'] === true"
--    data-ng-repeat="rssFeed in rssFeeds"
--  >
--    <a
--      href="../../api/collections/main/items?{{rssFeed.url}}"
--      title="{{rssFeed.label | translate}}"
--      aria-label="{{rssFeed.label | translate}}"
--    >
--      <span class="fa fa-rss" />
--    </a>
--  </li>
--  <!--<li>
--    <a href="rss.search?sortBy=changeDate&georss=simplepoint"
--       title="{{'rssFeed' | translate}}"
--       aria-label="{{'rssFeed' | translate}}">
--      <span class="fa fa-rss"/>
--    </a>
--  </li>-->
-+<ul class="nav navbar-nav">
-+	<li>
-+		<a href="https://www.berlin.de/sen/sbw/stadtdaten/geoportal/" target="_blank">
-+			<span class="fa fa-fw fa-info"></span>
-+			<span data-translate="">Geoportal Berlin</span>
-+		</a>
-+	</li>
-+	<li class="hidden-sm">
-+		<a href="https://www.berlin.de/sen/sbw/stadtdaten/geoportal/geoportal-daten-und-dienste/datenschutz/" target="_blank">
-+			<span class="fa fa-fw fa-shield"></span>
-+			<span data-translate="">Datenschutz</span>
-+		</a>
-+	</li>
-+	<li class="hidden-sm">
-+		<a href="https://www.berlin.de/sen/sbw/stadtdaten/geoportal/geoportal-daten-und-dienste/barrierefreiheitserklaerung/" target="_blank">
-+			<span class="fa fa-fw fa-arrow-circle-o-up"></span>
-+			<span data-translate="">Barrierefreiheit</span>
-+		</a>
-+	</li>
-+	<li class="hidden-sm">
-+		<a href="mailto:fisbroker@senstadt.berlin.de?subject=Geodatensuche">
-+			<span class="fa fa-fw fa-envelope"></span>
-+			<span data-translate="">Kontakt</span>
-+		</a>
-+	</li>
-+	<li class="hidden-sm">
-+		<a href="https://www.berlin.de/sen/sbw/ueber-uns/artikel.1246136.php" target="_blank">
-+			<span class="fa fa-fw fa-university"></span>
-+			<span data-translate="">Impressum</span>
-+		</a>
-+	</li>
- </ul>
++.gn-logo-link span {
++  font-weight: bold;
++}
++
 diff --git a/catalog/views/default/templates/recordView/title.html b/catalog/views/default/templates/recordView/title.html
 index 5d4ac0c..f120379 100644
 --- a/catalog/views/default/templates/recordView/title.html
