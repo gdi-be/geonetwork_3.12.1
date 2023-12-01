@@ -1,0 +1,373 @@
+diff --git a/WEB-INF/config-db/jdbc.properties b/WEB-INF/config-db/jdbc.properties
+index d99039e..4d3ecf6 100644
+--- a/WEB-INF/config-db/jdbc.properties
++++ b/WEB-INF/config-db/jdbc.properties
+@@ -21,11 +21,11 @@
+ # Rome - Italy. email: geonetwork@osgeo.org
+ #
+ 
+-jdbc.username=#{systemEnvironment['GEONETWORK_DB_USERNAME']?:'www-data'}
+-jdbc.password=#{systemEnvironment['GEONETWORK_DB_PASSWORD']?:'www-data'}
+-jdbc.database=#{systemEnvironment['GEONETWORK_DB_NAME']?:'~/gn'}
+-jdbc.host=#{systemEnvironment['GEONETWORK_DB_HOST']?:'localhost'}
+-jdbc.port=#{systemEnvironment['GEONETWORK_DB_PORT']}
++jdbc.username=postgres
++jdbc.password=postgres
++jdbc.database=gnos
++jdbc.host=postgres
++jdbc.port=5432
+ jdbc.connectionProperties=#{systemEnvironment['GEONETWORK_DB_CONNECTION_PROPERTIES']}
+ jdbc.basic.removeAbandoned=true
+ jdbc.basic.removeAbandonedTimeout=300
+diff --git a/WEB-INF/config-node/srv.xml b/WEB-INF/config-node/srv.xml
+index c10e7e8..cb2cdbd 100644
+--- a/WEB-INF/config-node/srv.xml
++++ b/WEB-INF/config-node/srv.xml
+@@ -27,23 +27,20 @@
+        xmlns="http://www.springframework.org/schema/beans"
+        xsi:schemaLocation="
+         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
++
+   <import resource="classpath*:/config-spring-geonetwork.xml"/>
+   <import resource="../config-db/database_migration.xml"/>
+ 
+-  <!-- Default using the db.config.file if it exists
+-       and if not then derive the db file based on the db.type.
+-
+-       Use Java argument -Dgeonetwork.db.type=postgres to customize
+-        the database type or change the resource URL to ../config-db/postgres.xml.
+ 
+-       Supported types:
+-       * db2
+-       * h2 (default)
+-       * jndi
+-       * mysql
+-       * oracle
+-       * postgres
+-       * sqlserver
+-    -->
+-  <import resource="../config-db/${geonetwork.db.type:h2}.xml"/>
++  <!-- Uncomment the database configuration you need to use -->
++  <!-- Default using the db.config.file if it exists and if not then derive the db file based on the db_type -->
++  <!--<import resource="../config-db/${geonetwork.db.type:h2}.xml"/> -->
++  <!--<import resource="../config-db/h2.xml"/> -->
++  <!--<import resource="../config-db/jndi.xml"/> -->
++  <!--<import resource="../config-db/oracle.xml"/>-->
++  <!--<import resource="../config-db/mysql.xml"/> -->
++  <!--<import resource="../config-db/db2.xml"/> -->
++  <import resource="../config-db/postgres.xml"/>
++  <!--<import resource="../config-db/sqlserver.xml"/> -->
++  <!--<import resource="../config-db/postgres-postgis.xml"/> -->
+ </beans>
+diff --git a/WEB-INF/config.properties b/WEB-INF/config.properties
+index 0e3d4ef..4a9e253 100644
+--- a/WEB-INF/config.properties
++++ b/WEB-INF/config.properties
+@@ -13,7 +13,7 @@ usersavedselection.watchlist.recordurl=api/records/{{index:uuid}}
+ 
+ es.protocol=http
+ es.port=9200
+-es.host=localhost
++es.host=elasticsearch
+ es.url=${es.protocol}://${es.host}:${es.port}
+ es.username=
+ es.password=
+@@ -33,7 +33,7 @@ es.index.records_public=${es.index.records_public}
+ es.index.searchlogs=gn-searchlogs
+ es.index.searchlogs.type=searchlogs
+ 
+-kb.url=http://localhost:5601
++kb.url=http://kibana:5601
+ 
+ es.index.checker.interval=0/5 * * * * ?
+ 
+@@ -47,7 +47,7 @@ urlChecker.UserAgent=GeoNetwork Link Checker
+ 
+ thesaurus.cache.maxsize=400000
+ 
+-map.bbox.background.service=https://ows.terrestris.de/osm/service?SERVICE=WMS&amp;REQUEST=GetMap&amp;VERSION=1.1.0&amp;LAYERS=OSM-WMS&amp;STYLES=default&amp;SRS={srs}&amp;BBOX={minx},{miny},{maxx},{maxy}&amp;WIDTH={width}&amp;HEIGHT={height}&amp;FORMAT=image/png
++map.bbox.background.service=https://sgx.geodatenzentrum.de/wms_basemapde?SERVICE=WMS&amp;REQUEST=GetMap&amp;VERSION=1.1.0&amp;LAYERS=de_basemapde_web_raster_grau&amp;STYLES=inspire_common:DEFAULT&amp;SRS={srs}&amp;BBOX={minx},{miny},{maxx},{maxy}&amp;WIDTH={width}&amp;HEIGHT={height}&amp;FORMAT=image/png
+ 
+ # Set to false to enable the services to draw map extents (region.getmap and {metadatauuid}/extents.png) accepting
+ # urls for map services to provide the background layers. Otherwise the only allowed options are from the settings
+diff --git a/WEB-INF/data/config/encryptor.properties b/WEB-INF/data/config/encryptor.properties
+index 5d3b1e7..687232b 100644
+--- a/WEB-INF/data/config/encryptor.properties
++++ b/WEB-INF/data/config/encryptor.properties
+@@ -1,3 +1,5 @@
++# Generated at 2023-09-02T13:01:21.512Z.
++
+ # Password encryptor configuration
+ encryptor.algorithm = PBEWithMD5AndDES
+-encryptor.password =
++encryptor.password =v0fsC4CoMx
+diff --git a/WEB-INF/data/config/schema_plugins/iso19139/loc/ger/codelists.xml b/WEB-INF/data/config/schema_plugins/iso19139/loc/ger/codelists.xml
+index bb34ecd..38c9e35 100644
+--- a/WEB-INF/data/config/schema_plugins/iso19139/loc/ger/codelists.xml
++++ b/WEB-INF/data/config/schema_plugins/iso19139/loc/ger/codelists.xml
+@@ -1543,7 +1543,14 @@
+     <!-- - - - - - - - - - - - - - - - - - - - - - - - - -->
+     <entry>
+       <code>service</code>
+-      <label>Service</label>
++      <label>Dienst</label>
++      <description>Information gilt für einen Dienst, welcher von einem Anbieter über definierte
++        Schnittstellen einem Dienstnutzer zur Verfügung gestellt wird
++      </description>
++    </entry>
++    <entry>
++      <code>application</code>
++      <label>Anwendung</label>
+       <description>Information gilt für einen Dienst, welcher von einem Anbieter über definierte
+         Schnittstellen einem Dienstnutzer zur Verfügung gestellt wird
+       </description>
+@@ -1605,12 +1612,19 @@
+             displayIf="/ancestor::node()[name()='gmd:MD_Metadata']/gmd:identificationInfo/srv:SV_ServiceIdentification">
+     <entry>
+       <code>service</code>
+-      <label>Service</label>
++      <label>Dienst</label>
+       <description>Information applies to a capability which a service provider entity makes
+         available to a service user entity through a set of interfaces that define a behaviour,
+         such as a use case
+       </description>
+     </entry>
++    <entry>
++      <code>application</code>
++      <label>Anwendung</label>
++      <description>Information gilt für einen Dienst, welcher von einem Anbieter über definierte
++        Schnittstellen einem Dienstnutzer zur Verfügung gestellt wird
++      </description>
++    </entry>
+   </codelist>
+   <!-- ==================================================== -->
+   <codelist name="gmd:MD_SpatialRepresentationTypeCode">
+@@ -1989,7 +2003,14 @@
+     <!-- - - - - - - - - - - - - - - - - - - - - - - - - -->
+     <entry>
+       <code>service</code>
+-      <label>Service</label>
++      <label>Dienst</label>
++      <description>Information gilt für einen Dienst, welcher von einem Anbieter über definierte
++        Schnittstellen einem Dienstnutzer zur Verfügung gestellt wird
++      </description>
++    </entry>
++    <entry>
++      <code>application</code>
++      <label>Anwendung</label>
+       <description>Information gilt für einen Dienst, welcher von einem Anbieter über definierte
+         Schnittstellen einem Dienstnutzer zur Verfügung gestellt wird
+       </description>
+diff --git a/WEB-INF/web.xml b/WEB-INF/web.xml
+index b74d2d3..2c9b97c 100644
+--- a/WEB-INF/web.xml
++++ b/WEB-INF/web.xml
+@@ -455,7 +455,7 @@
+     <servlet-class>org.fao.geonet.proxy.URITemplateProxyServlet</servlet-class>
+     <init-param>
+       <param-name>targetUri</param-name>
+-      <param-value>http://localhost:9200/gn-features/{_}</param-value>
++      <param-value>http://elasticsearch:9200/gn-features/{_}</param-value>
+     </init-param>
+     <init-param>
+       <param-name>log</param-name>
+@@ -489,7 +489,7 @@
+     <servlet-class>org.fao.geonet.proxy.URITemplateProxyServlet</servlet-class>
+     <init-param>
+       <param-name>targetUri</param-name>
+-      <param-value>http://localhost:5601</param-value>
++      <param-value>http://kibana:5601</param-value>
+     </init-param>
+     <init-param>
+       <param-name>log</param-name>
+diff --git a/catalog/components/search/resultsview/partials/viewtemplates/grid.html b/catalog/components/search/resultsview/partials/viewtemplates/grid.html
+index c413513..e014a7c 100644
+--- a/catalog/components/search/resultsview/partials/viewtemplates/grid.html
++++ b/catalog/components/search/resultsview/partials/viewtemplates/grid.html
+@@ -21,9 +21,25 @@
+           />
+         </div>
+         <span
+-          class="fa gn-icon-{{md.resourceType[0]}}"
+-          title="{{md.resourceType[0] | translate}}"
++          class="fa gn-icon-dataset"
++          title="Datensatz"
++	  data-ng-if="md.resourceType[0] == 'dataset'"
+         ></span>
++        <span
++          class="fa fa-eye"
++	  title="Darstellungsdienst"
++	  data-ng-if="md.resourceType[0] == 'service' && md.link[0].urlObject.default.indexOf('wms') != -1"
++        ></span>
++        <span
++          class="fa fa-download"
++	  title="Downloaddienst"
++	  data-ng-if="md.resourceType[0] == 'service' && (md.link[0].urlObject.default.indexOf('wfs') != -1 || md.link[0].urlObject.default.indexOf('feed') != -1)"
++	  ></span>
++        <span
++          class="fa fa-desktop"
++	  title="Anwendung"
++	  data-ng-if="md.resourceType[0] == 'application'"
++	  ></span>
+         <h1>
+           <a
+             href=""
+diff --git a/catalog/js/Gn.js b/catalog/js/Gn.js
+index 74ea7ce..4a527f6 100644
+--- a/catalog/js/Gn.js
++++ b/catalog/js/Gn.js
+@@ -59,4 +59,31 @@ var geonetwork = {};
+       $locationProvider.hashPrefix("");
+     }
+   ]);
++
++  window.addEventListener('hashchange', function() {
++    if (window.location.hash.startsWith('#/metadata')) {
++      this.window.setTimeout(function() {
++        var parents = document.querySelectorAll('.gn-metadata-display');
++        parents.forEach(function(parent) {
++          parent.querySelectorAll('a').forEach(function(a) {
++            var sameOrigin = a.href.startsWith('#') || a.href.startsWith(window.location.origin);
++            if (sameOrigin) {
++              delete a.target;
++            } else {
++              a.target = '_blank';
++            }
++          });
++        });
++      }, 1000);
++    }
++    if (window.location.hash.startsWith('#/search')) {
++      var nodes = document.querySelectorAll('[data-ng-click="next()"],[data-ng-click="previous()"]');
++      nodes.forEach(function(node) {
++        node.addEventListener('click', function() {
++          window.scrollTo(0, 0);
++        });
++      });
++    }
++  });
++
+ })();
+diff --git a/catalog/locales/de-v4.json b/catalog/locales/de-v4.json
+index 991dbfd..93f8e49 100644
+--- a/catalog/locales/de-v4.json
++++ b/catalog/locales/de-v4.json
+@@ -92,7 +92,7 @@
+   "isHarvested-true": "Geharvested",
+   "isHarvested-false": "Lokal",
+   "deleteRecordConfirm": "Wollen Sie wirklich '{{resourceTitle}}' entfernen?",
+-  "range-relation-intersects": "Intersects",
++  "range-relation-intersects": "Schneidet",
+   "range-relation-within": "vollständig innerhalb",
+   "range-relation-contains": "Enthält",
+   "documentStandard": "Output-Schema",
+@@ -105,8 +105,8 @@
+   "facet-cl_hierarchyLevel": "Datensatztyp",
+   "facet-resourceType": "Datensatztyp",
+   "facet-cl_resourceScope": "Datensatztyp",
+-  "facet-cl_spatialRepresentationType": "Räumlicher Darstellungstyp",
+-  "facet-availableInServices": "Verfügbar in",
++  "facet-cl_spatialRepresentationType": "Datentyp",
++  "facet-availableInServices": "Art des Dienstes",
+   "availableInServices-availableInDownloadService": "Download-Dienste",
+   "availableInServices-availableInViewService": "Darstellungsdienst",
+   "facet-th_gemet_tree": "Umwelt-Tags",
+@@ -171,8 +171,8 @@
+   "searchInvalidResponse": "Die Abfrage gab eine ungültige Antwort zurück. Überprüfen Sie die Konsole für Details.",
+   "exactMatch": "Genaue Übereinstimmung",
+   "exactMatch-help": "Genaue Übereinstimmung bedeutet, dass bei Suchbegriffen \"\" hinzugefügt werden.",
+-  "titleOnly": "Search in title only",
+-  "titleOnly-help": "Search in title only.",
++  "titleOnly": "Nur im Titel suchen",
++  "titleOnly-help": "Nur im Titel suchen",
+   "gnbbox": "Geographical area",
+   "featuresInMapExtent": "Features in current map extent only",
+   "heatmapAvailableForPointOnly": "Heatmap only supported for point layer.",
+@@ -294,10 +294,10 @@
+   "uiRestorePrevious": "Das zuletzt Gespeicherte wiederherstellen",
+   "onlyMyRecord": "Nur meine Metadaten",
+   "searchWithLang": "Languages",
+-  "searchAllLanguages-help": "Define which language is giving priorities to some records.",
+-  "searchInAllLanguages": "in all languages",
+-  "searchInUILanguage": "in UI language",
+-  "searchInDetectedLanguage": "in detected language",
++  "searchAllLanguages-help": "Definieren, welche Sprache Priorität hat",
++  "searchInAllLanguages": "in allen Sprachen",
++  "searchInUILanguage": "in der Sprache der Oberfläche",
++  "searchInDetectedLanguage": "in erkannter Sprache",
+   "forceALanguage": "in language:",
+   "cite.dataset": "Cite dataset",
+   "cite.format.html": "Html",
+diff --git a/catalog/style/gn.less b/catalog/style/gn.less
+index cd7cb38..8f0d77f 100644
+--- a/catalog/style/gn.less
++++ b/catalog/style/gn.less
+@@ -241,7 +241,10 @@ a {
+   cursor: pointer;
+ }
+ .gn-img-modal {
+-  width: 95vw;
++  display: flex;
++  justify-content: space-evenly;
++  flex-direction: row;
++  width: fit-content;
+   background-color: #fff;
+   img {
+     max-width: 100%;
+@@ -1695,3 +1698,24 @@ html {
+   top: 1.9em;
+   color: green;
+ }
++
++footer.navbar.navbar-default.gn-bottom-bar.ng-scope {
++  background: #545454;
++  color: white !important;
++}
++
++footer.navbar.navbar-default.gn-bottom-bar.ng-scope a {
++  color: white !important;
++}
++
++.gn-search-map,
++.gn-minimap-toggle,
++.gn-md-select,
++[data-gn-selection-widget] {
++  display: none !important;
++}
++
++.gn-logo-link span {
++  font-weight: bold;
++}
++
+diff --git a/catalog/views/default/templates/recordView/title.html b/catalog/views/default/templates/recordView/title.html
+index 5d4ac0c..f120379 100644
+--- a/catalog/views/default/templates/recordView/title.html
++++ b/catalog/views/default/templates/recordView/title.html
+@@ -1,6 +1,9 @@
+ <div>
+   <h1 class="gn-break">
+-    <i class="fa gn-icon-{{mdView.current.record.resourceType[0]}}" />
++  <i data-ng-if="mdView.current.record.resourceType[0] == 'application'" class="fa fa-desktop" />
++  <i data-ng-if="mdView.current.record.resourceType[0] == 'dataset'" class="fa gn-icon-dataset" />
++  <i data-ng-if="mdView.current.record.resourceType[0] == 'service' && mdView.current.record.serviceType == 'download'" class="fa fa-download" />
++  <i data-ng-if="mdView.current.record.resourceType[0] == 'service' && mdView.current.record.serviceType == 'view'" class="fa fa-eye" />
+ 
+     {{mdView.current.record.resourceTitle}}
+ 
+diff --git a/loc/ger/json/formatter.json b/loc/ger/json/formatter.json
+index 6ce4ad3..b9904b7 100644
+--- a/loc/ger/json/formatter.json
++++ b/loc/ger/json/formatter.json
+@@ -7,8 +7,10 @@
+     "overview": "Überblick",
+     "parent": "Eltern",
+     "source-link": "Quellen",
++    "service-link": "Dienst",
++    "service": "Dienst",
+     "testString": "Dieser dient für Tests, bitte nicht löschen!",
+     "xml": "XML",
+     "uncategorizedKeywords":"Keine Kategorie",
+     "related-link": "Relations"
+-}
+\ No newline at end of file
++}
