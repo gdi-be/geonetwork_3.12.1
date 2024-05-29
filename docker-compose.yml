@@ -22,7 +22,7 @@ services:
       - ./gn-public-data:/var/lib/geonetwork-data:z
       - ./logs/:/var/lib/jetty/logs/:z
   elasticsearch:
-    image: nexus.terrestris.de/elasticsearch:7.11.1
+    image: docker.terrestris.de/elasticsearch:7.11.1
     container_name: elasticsearch
     ulimits:
       memlock:
@@ -37,7 +37,7 @@ services:
     volumes:
       - ./esdata-public:/usr/share/elasticsearch/data:z
   kibana:
-    image: nexus.terrestris.de/kibana:7.11.1
+    image: docker.terrestris.de/kibana:7.11.1
     container_name: kibana
     environment:
       SERVER_NAME: 'kibana'
@@ -79,7 +79,7 @@ services:
       - ./gn-public-data2:/var/lib/geonetwork-data:z
       - ./logs2/:/var/lib/jetty/logs/:z
   elasticsearch2:
-    image: nexus.terrestris.de/elasticsearch:7.11.1
+    image: docker.terrestris.de/elasticsearch:7.11.1
     container_name: elasticsearch2
     ulimits:
       memlock:
@@ -94,7 +94,7 @@ services:
     volumes:
       - ./esdata-public2:/usr/share/elasticsearch/data:z
   kibana2:
-    image: nexus.terrestris.de/kibana:7.11.1
+    image: docker.terrestris.de/kibana:7.11.1
     container_name: kibana2
     environment:
       SERVER_NAME: 'kibana2'
