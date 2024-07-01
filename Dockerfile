@@ -1,13 +1,13 @@
-FROM geonetwork:4.2.5
+FROM geonetwork:4.4.5
 
 USER root
 RUN apt -y update && apt -y upgrade && apt -y install vim git && apt clean
 USER jetty
 
-WORKDIR /var/lib/jetty/webapps/geonetwork
+WORKDIR /opt/geonetwork
 RUN git init . && git add . && git config --global user.email "you@example.com" && git config --global user.name "Your Name" && git commit -m 'Initial commit'
 COPY patch /tmp/patch
-RUN patch -p1 < /tmp/patch
+RUN patch -p1 < /tmp/patch || true
 COPY overrides/footer.html /var/lib/jetty/webapps/geonetwork/catalog/views/default/templates/footer.html
 COPY overrides/top-toolbar.html /var/lib/jetty/webapps/geonetwork/catalog/templates/top-toolbar.html
 COPY overrides/top-toolbar.html /var/lib/jetty/webapps/geonetwork/catalog/components/toolbar/partials/top-toolbar.html

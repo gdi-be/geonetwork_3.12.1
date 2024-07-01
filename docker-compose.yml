@@ -1,4 +1,3 @@
-version: '3'
 services:
   gnos:
     container_name: gnos
@@ -12,17 +11,18 @@ services:
     ports:
       - 8888:8080
     environment:
-      DATA_DIR: /var/lib/geonetwork_data
-      ES_HOST: elasticsearch
-      ES_PROTOCOL: http
-      ES_PORT: 9200
-
-      KB_URL: http://kibana:5601
+      GN_CONFIG_PROPERTIES: >-
+        -Des.host=elasticsearch
+        -Des.protocol=http
+        -Des.port=9200
+        -Des.url=http://elasticsearch:9200
+        -Dkb.url=http://kibana:5601
+        -Dgeonetwork.dir=/var/lib/geonetwork_data
     volumes:
       - ./gn-public-data:/var/lib/geonetwork-data:z
       - ./logs/:/var/lib/jetty/logs/:z
   elasticsearch:
-    image: docker.terrestris.de/elasticsearch:7.11.1
+    image: docker.terrestris.de/elasticsearch:7.17.15
     container_name: elasticsearch
     ulimits:
       memlock:
@@ -37,7 +37,7 @@ services:
     volumes:
       - ./esdata-public:/usr/share/elasticsearch/data:z
   kibana:
-    image: docker.terrestris.de/kibana:7.11.1
+    image: docker.terrestris.de/kibana:7.17.15
     container_name: kibana
     environment:
       SERVER_NAME: 'kibana'
@@ -69,12 +69,13 @@ services:
     ports:
       - 8889:8080
     environment:
-      DATA_DIR: /var/lib/geonetwork_data
-      ES_HOST: elasticsearch2
-      ES_PROTOCOL: http
-      ES_PORT: 9200
-
-      KB_URL: http://kibana2:5601
+      GN_CONFIG_PROPERTIES: >-
+        -Des.host=elasticsearch
+        -Des.protocol=http
+        -Des.port=9200
+        -Des.url=http://elasticsearch:9200
+        -Dkb.url=http://kibana:5601
+        -Dgeonetwork.dir=/var/lib/geonetwork_data
     volumes:
       - ./gn-public-data2:/var/lib/geonetwork-data:z
       - ./logs2/:/var/lib/jetty/logs/:z

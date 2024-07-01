@@ -1,5 +1,5 @@
 diff --git a/WEB-INF/config-db/jdbc.properties b/WEB-INF/config-db/jdbc.properties
-index d99039e..4d3ecf6 100644
+index 3b7a4b5..291df12 100644
 --- a/WEB-INF/config-db/jdbc.properties
 +++ b/WEB-INF/config-db/jdbc.properties
 @@ -21,11 +21,11 @@
@@ -60,7 +60,7 @@ index c10e7e8..cb2cdbd 100644
 +  <!--<import resource="../config-db/postgres-postgis.xml"/> -->
  </beans>
 diff --git a/WEB-INF/config.properties b/WEB-INF/config.properties
-index 0e3d4ef..4a9e253 100644
+index 40f41c3..0d64a0a 100644
 --- a/WEB-INF/config.properties
 +++ b/WEB-INF/config.properties
 @@ -13,7 +13,7 @@ usersavedselection.watchlist.recordurl=api/records/{{index:uuid}}
@@ -81,7 +81,7 @@ index 0e3d4ef..4a9e253 100644
  
  es.index.checker.interval=0/5 * * * * ?
  
-@@ -47,7 +47,7 @@ urlChecker.UserAgent=GeoNetwork Link Checker
+@@ -59,7 +59,7 @@ urlChecker.UserAgent=GeoNetwork Link Checker
  
  thesaurus.cache.maxsize=400000
  
@@ -102,7 +102,7 @@ index 5d3b1e7..687232b 100644
 -encryptor.password =
 +encryptor.password =v0fsC4CoMx
 diff --git a/WEB-INF/data/config/schema_plugins/iso19139/loc/ger/codelists.xml b/WEB-INF/data/config/schema_plugins/iso19139/loc/ger/codelists.xml
-index bb34ecd..38c9e35 100644
+index fdf6efe..5df722e 100644
 --- a/WEB-INF/data/config/schema_plugins/iso19139/loc/ger/codelists.xml
 +++ b/WEB-INF/data/config/schema_plugins/iso19139/loc/ger/codelists.xml
 @@ -1543,7 +1543,14 @@
@@ -121,7 +121,7 @@ index bb34ecd..38c9e35 100644
        <description>Information gilt für einen Dienst, welcher von einem Anbieter über definierte
          Schnittstellen einem Dienstnutzer zur Verfügung gestellt wird
        </description>
-@@ -1605,12 +1612,19 @@
+@@ -1604,12 +1611,19 @@
              displayIf="/ancestor::node()[name()='gmd:MD_Metadata']/gmd:identificationInfo/srv:SV_ServiceIdentification">
      <entry>
        <code>service</code>
@@ -142,7 +142,7 @@ index bb34ecd..38c9e35 100644
    </codelist>
    <!-- ==================================================== -->
    <codelist name="gmd:MD_SpatialRepresentationTypeCode">
-@@ -1989,7 +2003,14 @@
+@@ -1988,7 +2002,14 @@
      <!-- - - - - - - - - - - - - - - - - - - - - - - - - -->
      <entry>
        <code>service</code>
@@ -159,10 +159,10 @@ index bb34ecd..38c9e35 100644
          Schnittstellen einem Dienstnutzer zur Verfügung gestellt wird
        </description>
 diff --git a/WEB-INF/web.xml b/WEB-INF/web.xml
-index b74d2d3..2c9b97c 100644
+index 6a1648b..a20ab65 100644
 --- a/WEB-INF/web.xml
 +++ b/WEB-INF/web.xml
-@@ -455,7 +455,7 @@
+@@ -464,7 +464,7 @@
      <servlet-class>org.fao.geonet.proxy.URITemplateProxyServlet</servlet-class>
      <init-param>
        <param-name>targetUri</param-name>
@@ -171,7 +171,7 @@ index b74d2d3..2c9b97c 100644
      </init-param>
      <init-param>
        <param-name>log</param-name>
-@@ -489,7 +489,7 @@
+@@ -498,7 +498,7 @@
      <servlet-class>org.fao.geonet.proxy.URITemplateProxyServlet</servlet-class>
      <init-param>
        <param-name>targetUri</param-name>
@@ -181,7 +181,7 @@ index b74d2d3..2c9b97c 100644
      <init-param>
        <param-name>log</param-name>
 diff --git a/catalog/components/search/resultsview/partials/viewtemplates/grid.html b/catalog/components/search/resultsview/partials/viewtemplates/grid.html
-index c413513..e014a7c 100644
+index 7b4e971..5d58896 100644
 --- a/catalog/components/search/resultsview/partials/viewtemplates/grid.html
 +++ b/catalog/components/search/resultsview/partials/viewtemplates/grid.html
 @@ -21,9 +21,25 @@
@@ -249,19 +249,10 @@ index 74ea7ce..4a527f6 100644
 +
  })();
 diff --git a/catalog/locales/de-v4.json b/catalog/locales/de-v4.json
-index 991dbfd..93f8e49 100644
+index 163db0f..62bb3ce 100644
 --- a/catalog/locales/de-v4.json
 +++ b/catalog/locales/de-v4.json
-@@ -92,7 +92,7 @@
-   "isHarvested-true": "Geharvested",
-   "isHarvested-false": "Lokal",
-   "deleteRecordConfirm": "Wollen Sie wirklich '{{resourceTitle}}' entfernen?",
--  "range-relation-intersects": "Intersects",
-+  "range-relation-intersects": "Schneidet",
-   "range-relation-within": "vollständig innerhalb",
-   "range-relation-contains": "Enthält",
-   "documentStandard": "Output-Schema",
-@@ -105,8 +105,8 @@
+@@ -111,8 +111,8 @@
    "facet-cl_hierarchyLevel": "Datensatztyp",
    "facet-resourceType": "Datensatztyp",
    "facet-cl_resourceScope": "Datensatztyp",
@@ -272,37 +263,11 @@ index 991dbfd..93f8e49 100644
    "availableInServices-availableInDownloadService": "Download-Dienste",
    "availableInServices-availableInViewService": "Darstellungsdienst",
    "facet-th_gemet_tree": "Umwelt-Tags",
-@@ -171,8 +171,8 @@
-   "searchInvalidResponse": "Die Abfrage gab eine ungültige Antwort zurück. Überprüfen Sie die Konsole für Details.",
-   "exactMatch": "Genaue Übereinstimmung",
-   "exactMatch-help": "Genaue Übereinstimmung bedeutet, dass bei Suchbegriffen \"\" hinzugefügt werden.",
--  "titleOnly": "Search in title only",
--  "titleOnly-help": "Search in title only.",
-+  "titleOnly": "Nur im Titel suchen",
-+  "titleOnly-help": "Nur im Titel suchen",
-   "gnbbox": "Geographical area",
-   "featuresInMapExtent": "Features in current map extent only",
-   "heatmapAvailableForPointOnly": "Heatmap only supported for point layer.",
-@@ -294,10 +294,10 @@
-   "uiRestorePrevious": "Das zuletzt Gespeicherte wiederherstellen",
-   "onlyMyRecord": "Nur meine Metadaten",
-   "searchWithLang": "Languages",
--  "searchAllLanguages-help": "Define which language is giving priorities to some records.",
--  "searchInAllLanguages": "in all languages",
--  "searchInUILanguage": "in UI language",
--  "searchInDetectedLanguage": "in detected language",
-+  "searchAllLanguages-help": "Definieren, welche Sprache Priorität hat",
-+  "searchInAllLanguages": "in allen Sprachen",
-+  "searchInUILanguage": "in der Sprache der Oberfläche",
-+  "searchInDetectedLanguage": "in erkannter Sprache",
-   "forceALanguage": "in language:",
-   "cite.dataset": "Cite dataset",
-   "cite.format.html": "Html",
 diff --git a/catalog/style/gn.less b/catalog/style/gn.less
-index cd7cb38..8f0d77f 100644
+index c0f4782..c511eb4 100644
 --- a/catalog/style/gn.less
 +++ b/catalog/style/gn.less
-@@ -241,7 +241,10 @@ a {
+@@ -243,7 +243,10 @@ a {
    cursor: pointer;
  }
  .gn-img-modal {
@@ -314,7 +279,7 @@ index cd7cb38..8f0d77f 100644
    background-color: #fff;
    img {
      max-width: 100%;
-@@ -1695,3 +1698,24 @@ html {
+@@ -1714,3 +1717,24 @@ html {
    top: 1.9em;
    color: green;
  }
@@ -340,17 +305,17 @@ index cd7cb38..8f0d77f 100644
 +}
 +
 diff --git a/catalog/views/default/templates/recordView/title.html b/catalog/views/default/templates/recordView/title.html
-index 5d4ac0c..f120379 100644
+index 19e4a0e..7ff737d 100644
 --- a/catalog/views/default/templates/recordView/title.html
 +++ b/catalog/views/default/templates/recordView/title.html
 @@ -1,6 +1,9 @@
  <div>
    <h1 class="gn-break">
--    <i class="fa gn-icon-{{mdView.current.record.resourceType[0]}}" />
-+  <i data-ng-if="mdView.current.record.resourceType[0] == 'application'" class="fa fa-desktop" />
-+  <i data-ng-if="mdView.current.record.resourceType[0] == 'dataset'" class="fa gn-icon-dataset" />
-+  <i data-ng-if="mdView.current.record.resourceType[0] == 'service' && mdView.current.record.serviceType == 'download'" class="fa fa-download" />
-+  <i data-ng-if="mdView.current.record.resourceType[0] == 'service' && mdView.current.record.serviceType == 'view'" class="fa fa-eye" />
+-    <i class="fa gn-icon-{{mdView.current.record.resourceType[0]}}"></i>
++    <i data-ng-if="mdView.current.record.resourceType[0] == 'application'" class="fa fa-desktop" />
++    <i data-ng-if="mdView.current.record.resourceType[0] == 'dataset'" class="fa gn-icon-dataset" />
++    <i data-ng-if="mdView.current.record.resourceType[0] == 'service' && mdView.current.record.serviceType == 'download'" class="fa fa-download" />
++    <i data-ng-if="mdView.current.record.resourceType[0] == 'service' && mdView.current.record.serviceType == 'view'" class="fa fa-eye" />
  
      {{mdView.current.record.resourceTitle}}
  
