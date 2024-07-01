@@ -180,6 +180,52 @@ index 6a1648b..a20ab65 100644
      </init-param>
      <init-param>
        <param-name>log</param-name>
+diff --git a/catalog/components/search/mdview/partials/contact.html b/catalog/components/search/mdview/partials/contact.html
+index 24ddcfd..f06cdae 100644
+--- a/catalog/components/search/mdview/partials/contact.html
++++ b/catalog/components/search/mdview/partials/contact.html
+@@ -4,10 +4,8 @@
+       class="gn-contact-card"
+       data-ng-if="mode == 'default'"
+       data-ng-repeat="c in mdContacts track by $index"
+-      gn-popover
+-      gn-popover-dismiss=".content"
+     >
+-      <div gn-popover-anchor class="row">
++      <div class="row">
+         <div
+           class="col-md-4"
+           data-gn-circle-letter-icon="c.organisation"
+@@ -20,7 +18,7 @@
+         </div>
+       </div>
+ 
+-      <div gn-popover-content>
++      <div>
+         <a data-ng-href="{{::c.website}}" data-ng-if="::c.website">
+           <i class="fa fa-fw fa-link"></i>
+           {{c.organisation}}
+@@ -54,10 +52,8 @@
+       class="gn-contact-card"
+       data-ng-if="mode == 'role'"
+       data-ng-repeat="cnts in mdContacts | groupBy:'role' track by $index"
+-      gn-popover
+-      gn-popover-dismiss=".content"
+     >
+-      <div gn-popover-anchor class="row">
++      <div class="row">
+         <div class="col-md-12">
+           <div class="gn-contact-card-role">{{cnts[0].role | translate}}</div>
+           <div class="col-md-12" data-ng-repeat="c in cnts | orderBy:'organisation'">
+@@ -75,7 +71,7 @@
+         </div>
+       </div>
+ 
+-      <div gn-popover-content>
++      <div>
+         <!--     Removing for now, because if you close open popup
+    the title disappear. <h3 class="popover-title">{{cnts[0].role | translate}}</h3>-->
+         <div data-ng-repeat="c in cnts | orderBy:'organisation'">
 diff --git a/catalog/components/search/resultsview/partials/viewtemplates/grid.html b/catalog/components/search/resultsview/partials/viewtemplates/grid.html
 index 7b4e971..5d58896 100644
 --- a/catalog/components/search/resultsview/partials/viewtemplates/grid.html
@@ -212,11 +258,92 @@ index 7b4e971..5d58896 100644
          <h1>
            <a
              href=""
+diff --git a/catalog/components/toolbar/partials/top-toolbar.html b/catalog/components/toolbar/partials/top-toolbar.html
+index 390865a..dc59f42 100644
+--- a/catalog/components/toolbar/partials/top-toolbar.html
++++ b/catalog/components/toolbar/partials/top-toolbar.html
+@@ -8,62 +8,25 @@
+       <img
+         class="gn-logo"
+         alt="{{'siteLogo' | translate}}"
+-        data-ng-src="{{gnUrl}}../images/logos/{{info['node/id'] || info['system/site/siteId']}}.png?random{{info['system/site/lastUpdate']}}"
++        src="/geonetwork/catalog/views/default/images/logo.png"
+       />
+     </a>
+-    <a
+-      class="hidden-sm hidden-md hidden-lg btn btn-link pull-left"
+-      data-gn-active-tb-item="{{gnCfg.mods.home.appUrl}}"
+-    >
+-      <span
+-        class="gn-name"
+-        data-ng-class="authenticated && user.isEditorOrMore() ? 'gn-truncate' : ''"
+-        title="{{info['system/site/name']}}"
+-        >{{info['node/name'] || info['system/site/name']}}</span
+-      >
+-    </a>
+-    <button
+-      type="button"
+-      class="navbar-toggle collapsed"
+-      data-toggle="collapse"
+-      data-target="#navbar"
+-      title="{{'toggleNavigation' | translate}}"
+-      aria-expanded="false"
+-      aria-controls="navbar"
+-    >
+-      <span class="sr-only" data-translate>toggleNavigation</span>
+-      <span class="icon-bar"></span>
+-      <span class="icon-bar"></span>
+-      <span class="icon-bar"></span>
+-    </button>
+   </div>
+   <div id="navbar" class="navbar-accessible navbar-collapse collapse">
+     <ul class="nav navbar-nav gn-menu-xs" role="menu">
+-      <li data-ng-repeat-start="menu in toolbarMenu"></li>
+-      <li data-ng-if="menu == 'gn-site-name-menu'" gn-site-name-menu=""></li>
+-      <li data-ng-if="menu == 'gn-portal-switcher'" gn-portal-switcher=""></li>
+-      <li data-ng-if="menu == 'gn-search-menu'" gn-search-menu=""></li>
+-      <li data-ng-if="menu == 'gn-map-menu'" gn-map-menu=""></li>
+-      <li data-ng-if="menu == 'gn-contribute-menu'" gn-contribute-menu=""></li>
+-      <li data-ng-if="menu == 'gn-admin-menu'" gn-admin-menu=""></li>
+-      <li
+-        data-ng-if="isPage(menu)"
+-        gn-static-page-menu="menu"
+-        language="{{lang}}"
+-        section="top"
+-      ></li>
+-      <ul
+-        data-ng-if="menu == 'gn-static-pages-list-viewer'"
+-        gn-static-pages-list-viewer=""
+-        language="{{lang}}"
+-        section="top"
+-        class="nav navbar-nav gn-menu-xs"
+-      ></ul>
+-      <li data-ng-repeat-end=""></li>
++      <li gn-site-name-menu="" />
++      <li gn-portal-switcher="" />
++      <li gn-search-menu="" />
++      <!-- <li gn-admin-menu="" /> -->
++      <!-- <li gn-map-menu="" />
++      <li gn-contribute-menu="" />
++      <li gn-admin-menu="" />
++      <li gn-static-pages-list-viewer data-section="top" data-language="{{lang}}" /> -->
+     </ul>
+-    <div class="navbar-right">
+-      <ul gn-signin-menu=""></ul>
+-      <div gn-languages-menu=""></div>
+-    </div>
++
++    <!-- <div class="navbar-right">
++      <ul gn-signin-menu="" />
++      <div gn-languages-menu="" />
++    </div> -->
+   </div>
+ </div>
 diff --git a/catalog/js/Gn.js b/catalog/js/Gn.js
-index 74ea7ce..4a527f6 100644
+index 74ea7ce..1bedbe3 100644
 --- a/catalog/js/Gn.js
 +++ b/catalog/js/Gn.js
-@@ -59,4 +59,31 @@ var geonetwork = {};
+@@ -59,4 +59,34 @@ var geonetwork = {};
        $locationProvider.hashPrefix("");
      }
    ]);
@@ -235,6 +362,9 @@ index 74ea7ce..4a527f6 100644
 +            }
 +          });
 +        });
++        var constraintsWithBraces = document.querySelectorAll('p[data-gn-metadata-object-field="MD_LegalConstraintsOtherConstraints"] > p').values().filter(p => p.querySelector('span') && p.querySelector('span').innerHTML.startsWith('{'));
++	      console.log(constraintsWithBraces)
++        constraintsWithBraces.forEach(p => p.remove());
 +      }, 1000);
 +    }
 +    if (window.location.hash.startsWith('#/search')) {
@@ -264,7 +394,7 @@ index 163db0f..62bb3ce 100644
    "availableInServices-availableInViewService": "Darstellungsdienst",
    "facet-th_gemet_tree": "Umwelt-Tags",
 diff --git a/catalog/style/gn.less b/catalog/style/gn.less
-index c0f4782..c511eb4 100644
+index c0f4782..401630a 100644
 --- a/catalog/style/gn.less
 +++ b/catalog/style/gn.less
 @@ -243,7 +243,10 @@ a {
@@ -279,7 +409,7 @@ index c0f4782..c511eb4 100644
    background-color: #fff;
    img {
      max-width: 100%;
-@@ -1714,3 +1717,24 @@ html {
+@@ -1714,3 +1717,40 @@ html {
    top: 1.9em;
    color: green;
  }
@@ -304,21 +434,223 @@ index c0f4782..c511eb4 100644
 +  font-weight: bold;
 +}
 +
-diff --git a/catalog/views/default/templates/recordView/title.html b/catalog/views/default/templates/recordView/title.html
-index 19e4a0e..7ff737d 100644
---- a/catalog/views/default/templates/recordView/title.html
-+++ b/catalog/views/default/templates/recordView/title.html
-@@ -1,6 +1,9 @@
- <div>
-   <h1 class="gn-break">
--    <i class="fa gn-icon-{{mdView.current.record.resourceType[0]}}"></i>
-+    <i data-ng-if="mdView.current.record.resourceType[0] == 'application'" class="fa fa-desktop" />
-+    <i data-ng-if="mdView.current.record.resourceType[0] == 'dataset'" class="fa gn-icon-dataset" />
-+    <i data-ng-if="mdView.current.record.resourceType[0] == 'service' && mdView.current.record.serviceType == 'download'" class="fa fa-download" />
-+    <i data-ng-if="mdView.current.record.resourceType[0] == 'service' && mdView.current.record.serviceType == 'view'" class="fa fa-eye" />
++.gn-md-view .gn-card .img-thumbnail {
++  max-height: inherit !important;
++  min-height: inherit !important;
++}
++
++div[data-gn-metadata-contacts] ul {
++  display: flex !important;
++  li {
++    display: flex !important;
++  }
++}
++
++div[data-ng-if="mdView.current.record.uuid"] div.input-group {
++  width: 350px;
++}
++
+diff --git a/catalog/templates/top-toolbar.html b/catalog/templates/top-toolbar.html
+index cd87d5e..dc59f42 100644
+--- a/catalog/templates/top-toolbar.html
++++ b/catalog/templates/top-toolbar.html
+@@ -8,49 +8,25 @@
+       <img
+         class="gn-logo"
+         alt="{{'siteLogo' | translate}}"
+-        data-ng-src="{{gnUrl}}../images/logos/{{info['node/id'] || info['system/site/siteId']}}.png?random{{info['system/site/lastUpdate']}}"
++        src="/geonetwork/catalog/views/default/images/logo.png"
+       />
+     </a>
+-    <a
+-      class="hidden-sm hidden-md hidden-lg btn btn-link pull-left"
+-      data-gn-active-tb-item="{{gnCfg.mods.home.appUrl}}"
+-    >
+-      <span
+-        class="gn-name"
+-        data-ng-class="authenticated && user.isEditorOrMore() ? 'gn-truncate' : ''"
+-        title="{{info['system/site/name']}}"
+-        >{{info['node/name'] || info['system/site/name']}}</span
+-      >
+-    </a>
+-    <button
+-      type="button"
+-      class="navbar-toggle collapsed"
+-      data-toggle="collapse"
+-      data-target="#navbar"
+-      title="{{'toggleNavigation' | translate}}"
+-      aria-expanded="false"
+-      aria-controls="navbar"
+-    >
+-      <span class="sr-only" data-translate>toggleNavigation</span>
+-      <span class="icon-bar"></span>
+-      <span class="icon-bar"></span>
+-      <span class="icon-bar"></span>
+-    </button>
+   </div>
+   <div id="navbar" class="navbar-accessible navbar-collapse collapse">
+     <ul class="nav navbar-nav gn-menu-xs" role="menu">
+-      <li gn-site-name-menu=""></li>
+-      <li gn-portal-switcher=""></li>
+-      <li gn-search-menu=""></li>
+-      <li gn-map-menu=""></li>
+-      <li gn-contribute-menu=""></li>
+-      <li gn-admin-menu=""></li>
+-      <li gn-static-pages-list-viewer data-section="top" data-language="{{lang}}"></li>
++      <li gn-site-name-menu="" />
++      <li gn-portal-switcher="" />
++      <li gn-search-menu="" />
++      <!-- <li gn-admin-menu="" /> -->
++      <!-- <li gn-map-menu="" />
++      <li gn-contribute-menu="" />
++      <li gn-admin-menu="" />
++      <li gn-static-pages-list-viewer data-section="top" data-language="{{lang}}" /> -->
+     </ul>
  
-     {{mdView.current.record.resourceTitle}}
- 
+-    <div class="navbar-right">
+-      <ul gn-signin-menu=""></ul>
+-      <div gn-languages-menu=""></div>
+-    </div>
++    <!-- <div class="navbar-right">
++      <ul gn-signin-menu="" />
++      <div gn-languages-menu="" />
++    </div> -->
+   </div>
+ </div>
+diff --git a/catalog/views/default/templates/footer.html b/catalog/views/default/templates/footer.html
+index 018b6ee..a3039f9 100644
+--- a/catalog/views/default/templates/footer.html
++++ b/catalog/views/default/templates/footer.html
+@@ -1,98 +1,32 @@
+-<ul class="nav navbar-nav" ng-show="::getApplicationInfoVisible()">
+-  <li class="navbar-text">
+-    <span
+-      data-translate=""
+-      data-translate-values="{platform: '{{info['system/platform/name']}}', version: '{{info['system/platform/version']}}', subversion: '{{info['system/platform/subVersion']}}'}"
+-    >
+-      versionDetails</span
+-    >
+-  </li>
+-  <li>
+-    <a href="http://geonetwork-opensource.org/">
+-      <span data-translate="">about</span>
+-    </a>
+-  </li>
+-  <li class="hidden-sm">
+-    <a href="https://github.com/geonetwork/core-geonetwork">
+-      <span class="fa fa-fw fa-github"></span>
+-      <span data-translate="">github</span>
+-    </a>
+-  </li>
+-  <li>
+-    <a href="../../doc/api" title="{{'learnTheApi' | translate}}">API</a>
+-  </li>
+-</ul>
+-<ul
+-  class="nav navbar-nav"
+-  gn-static-pages-list-viewer
+-  data-section="footer"
+-  data-language="{{lang}}"
+-></ul>
+-<ul class="nav navbar-nav" ng-show="getSocialLinksVisible()">
+-  <li class="navbar-text">
+-    <span data-translate="">shareOn</span>
+-  </li>
+-  <li>
+-    <a
+-      href="https://twitter.com/share?url={{socialMediaLink | encodeURIComponent}}"
+-      target="_blank"
+-      title="{{'shareOnTwitter' | translate}}"
+-      aria-label="{{'shareOnTwitter' | translate}}"
+-    >
+-      <span class="fa fa-twitter"></span>
+-    </a>
+-  </li>
+-  <li>
+-    <a
+-      href="https://www.facebook.com/sharer.php?u={{socialMediaLink | encodeURIComponent}}"
+-      target="_blank"
+-      title="{{'shareOnFacebook' | translate}}"
+-      aria-label="{{'shareOnFacebook' | translate}}"
+-    >
+-      <span class="fa fa-facebook"></span>
+-    </a>
+-  </li>
+-  <li>
+-    <a
+-      href="http://www.linkedin.com/shareArticle?mini=true&amp;url={{socialMediaLink | encodeURIComponent}}"
+-      target="_blank"
+-      title="{{'shareOnLinkedIn' | translate}}"
+-      aria-label="{{'shareOnLinkedIn' | translate}}"
+-    >
+-      <span class="fa fa-linkedin"></span>
+-    </a>
+-  </li>
+-  <li>
+-    <a
+-      href="mailto:?subject={{info.site.name}}&amp;body={{socialMediaLink | encodeURIComponent}}"
+-      target="_blank"
+-      title="{{'shareByEmail' | translate}}"
+-      aria-label="{{'shareByEmail' | translate}}"
+-    >
+-      <span class="fa fa-envelope-o"></span>
+-    </a>
+-  </li>
+-  <li>
+-    <a
+-      href=""
+-      data-ng-click="getPermalink('', socialMediaLink)"
+-      title="{{'permalink' | translate}}"
+-      aria-label="{{'permalink' | translate}}"
+-    >
+-      <span class="fa fa-fw fa-link"></span
+-    ></a>
+-  </li>
+-  <li
+-    data-ng-if="info['microservices/enabled'] === true"
+-    data-ng-repeat="rssFeed in rssFeeds"
+-  >
+-    <a
+-      href="../../api/collections/{{nodeId === 'srv' ? 'main' : nodeId}}/items?{{rssFeed.url}}"
+-      title="{{rssFeed.label | translate}}"
+-      aria-label="{{rssFeed.label | translate}}"
+-    >
+-      <span data-ng-if="rssFeeds.length > 1"> {{rssFeed.label | translate}} </span>
+-      <span class="fa fa-fw fa-rss"></span>
+-    </a>
+-  </li>
++<ul class="nav navbar-nav">
++	<li>
++		<a href="https://www.berlin.de/sen/sbw/stadtdaten/geoportal/" target="_blank">
++			<span class="fa fa-fw fa-info"></span>
++			<span data-translate="">Geoportal Berlin</span>
++		</a>
++	</li>
++	<li class="hidden-sm">
++		<a href="https://www.berlin.de/sen/sbw/stadtdaten/geoportal/geoportal-daten-und-dienste/datenschutz/" target="_blank">
++			<span class="fa fa-fw fa-shield"></span>
++			<span data-translate="">Datenschutz</span>
++		</a>
++	</li>
++	<li class="hidden-sm">
++		<a href="https://www.berlin.de/sen/sbw/stadtdaten/geoportal/geoportal-daten-und-dienste/barrierefreiheitserklaerung/" target="_blank">
++			<span class="fa fa-fw fa-arrow-circle-o-up"></span>
++			<span data-translate="">Barrierefreiheit</span>
++		</a>
++	</li>
++	<li class="hidden-sm">
++		<a href="mailto:fisbroker@senstadt.berlin.de?subject=Geodatensuche">
++			<span class="fa fa-fw fa-envelope"></span>
++			<span data-translate="">Kontakt</span>
++		</a>
++	</li>
++	<li class="hidden-sm">
++		<a href="https://www.berlin.de/sen/sbw/ueber-uns/artikel.1246136.php" target="_blank">
++			<span class="fa fa-fw fa-university"></span>
++			<span data-translate="">Impressum</span>
++		</a>
++	</li>
+ </ul>
 diff --git a/loc/ger/json/formatter.json b/loc/ger/json/formatter.json
 index 6ce4ad3..b9904b7 100644
 --- a/loc/ger/json/formatter.json
