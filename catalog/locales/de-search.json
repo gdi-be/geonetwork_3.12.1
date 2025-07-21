@@ -209,7 +209,7 @@
     "publicationDate": "Veröffentlichungsdatum",
     "creationDate": "Erstellungsdatum",
     "revisionDate": "Datum der Überarbeitung",
-    "tempExtentBegin": "Periode",
+    "tempExtentBegin": "Gültigkeitszeitraum",
     "updateFrequency": "Überarbeitungsintervall",
     "quality": "Qualität",
     "lineage": "Herkunft",
