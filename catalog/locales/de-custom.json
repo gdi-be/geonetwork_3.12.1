@@ -6,15 +6,15 @@
 	"metadataPOCs": "Kontakt4",
 	"metadataContact": "Kontakt5",
 	"mdContact": "Kontakt6",
-	"Keywords": "Schlüsselwörter",
-	"keywords": "Schlüsselwörter",
-	"keyword": "Schlüsselwort",
+	"Keywords": "Schlagwörter",
+	"keywords": "Schlagwörter",
+	"keyword": "Schlagwörter",
 	"spatialRepresentationTypes": "Datentyp",
 	"serviceTypes": "Art des Dienstes",
 	"searchOver": "Suche in <strong>{{records}}</strong> Datenbeständen, Diensten & Anwendungen",
 	"downloadsAndResources": "Weitere Informationen",
 	"associatedResources": "Ressourcenverweise",
-	"otherKeywords": "Schlüsselwörter",
+	"otherKeywords": "Schlagwörter",
 	"legalConstraints": "Nutzungs- und Zugriffsbedingungen",
 	"orgNamesTree": "Kontakt für die Ressource1",
 	"resourceContact": "Verantwortliche Stelle(n) für die Ressource",
@@ -43,5 +43,6 @@
     "atomLinkDetails": "Die Daten sind im Service-Feed unter <a href='{{url}}' target='_blank'>{{url}}</a> veröffentlicht.",
 	"wfsChooseFeatureTypeToDownload": "Wählen Sie einen Feature-Type",
 	"topicCats": "ISO-Kategorien",
-	"browseTopics": "Filtern nach ISO-Kategorien"
+	"browseTopics": "Filtern nach ISO-Kategorien",
+	"listOfCategories": "ISO-Kategorien"
 }
