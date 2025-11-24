@@ -46,5 +46,7 @@
 	"browseTopics": "Filtern nach ISO-Kategorien",
 	"listOfCategories": "ISO-Kategorien",
 	"tempExtentBegin": "Gültigkeitszeitraum",
-	"updateFrequency": "Pflegeintervall"
+	"updateFrequency": "Pflegeintervall",
+	"spatialRepresentationType": "Räumliche Darstellungsart",
+	"cl_spatialRepresentationType": "Räumliche Darstellungsart"
 }
