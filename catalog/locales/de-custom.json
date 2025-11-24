@@ -40,7 +40,7 @@
     "wcsLinkDetails": "Die Daten sind im Downloaddienst (WCS) unter <a href='{{url}}' target='_blank'>{{url}}</a> mit Layername <strong>{{layer}}</strong>veröffentlicht.",
     "sosLinkDetails": "Die Daten sind im Sensor Observation Service (SOS) unter <a href='{{url}}' target='_blank'>{{url}}</a> mit dem Namen <strong>{{layer}}</strong> veröffentlicht.",
     "atomDatasetsInFeed": "verfügbare Datensätze:",
-    "atomLinkDetails": "Die Daten sind im Service-Feed unter <a href='{{url}}' target='_blank'>{{url}}</a> veröffentlicht.",
+    "atomLinkDetails": "Die Daten sind im Service-Feed (ATOM) unter <a href='{{url}}' target='_blank'>{{url}}</a> veröffentlicht.",
 	"wfsChooseFeatureTypeToDownload": "Wählen Sie einen Feature-Type",
 	"topicCats": "ISO-Kategorien",
 	"browseTopics": "Filtern nach ISO-Kategorien",
