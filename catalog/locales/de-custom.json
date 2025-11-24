@@ -9,7 +9,7 @@
 	"Keywords": "Schlagwörter",
 	"keywords": "Schlagwörter",
 	"keyword": "Schlagwörter",
-	"spatialRepresentationTypes": "Datentyp",
+	"spatialRepresentationTypes": "Räumliche Darstellungsarten",
 	"serviceTypes": "Art des Dienstes",
 	"searchOver": "Suche in <strong>{{records}}</strong> Datenbeständen, Diensten & Anwendungen",
 	"downloadsAndResources": "Weitere Informationen",
