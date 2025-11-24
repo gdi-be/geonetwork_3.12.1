@@ -44,5 +44,6 @@
 	"wfsChooseFeatureTypeToDownload": "Wählen Sie einen Feature-Type",
 	"topicCats": "ISO-Kategorien",
 	"browseTopics": "Filtern nach ISO-Kategorien",
-	"listOfCategories": "ISO-Kategorien"
+	"listOfCategories": "ISO-Kategorien",
+	"tempExtentBegin": "Gültigkeitszeitraum"
 }
