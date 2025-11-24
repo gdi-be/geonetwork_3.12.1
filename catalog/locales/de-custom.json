@@ -36,7 +36,7 @@
     "wmtsLinkDetails": "Die Daten sind im Darstellungsdienst (WMTS) unter <a href='{{url}}' target='_blank'>{{url}}</a> mit dem Identifikator <strong>{{layer}}</strong> veröffentlicht.",
     "wmtsServiceLinkDetails": "Die Daten sind im Darstellungsdienst (WMTS) unter <a href='{{url}}' target='_blank'>{{url}}</a> veröffentlicht.",
     "wfsLinkDetails": "Die Daten sind im Downloaddienst (WFS) unter <a href='{{url}}' target='_blank'>{{url}}</a> mit dem Layernamen <strong>{{layer}}</strong> veröffentlicht.",
-    "wfsServiceLinkDetails": "Die Daten sind ist im Downloaddienst (WFS) unter <a href='{{url}}' target='_blank'>{{url}}</a> veröffentlicht.",
+    "wfsServiceLinkDetails": "Die Daten sind im Downloaddienst (WFS) unter <a href='{{url}}' target='_blank'>{{url}}</a> veröffentlicht.",
     "wcsLinkDetails": "Die Daten sind im Downloaddienst (WCS) unter <a href='{{url}}' target='_blank'>{{url}}</a> mit Layername <strong>{{layer}}</strong>veröffentlicht.",
     "sosLinkDetails": "Die Daten sind im Sensor Observation Service (SOS) unter <a href='{{url}}' target='_blank'>{{url}}</a> mit dem Namen <strong>{{layer}}</strong> veröffentlicht.",
     "atomDatasetsInFeed": "verfügbare Datensätze:",
