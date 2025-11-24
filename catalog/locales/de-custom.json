@@ -23,7 +23,7 @@
 	"pointOfContact": "Kontaktstelle",
 	"contactSetForResource": "Kontakt für die Ressource3",
 	"lineage": "Herkunft der Daten",
-	"uuid": "Metadaten-ID",
+	"uuid": "Metadatensatzidentifikator",
 	"tempExtent": "Zeitliche Angaben",
 	"revisionDate": "Änderungsdatum",
 	"updatedOn": "Aktualisierungsdatum der Metadaten",
@@ -45,5 +45,6 @@
 	"topicCats": "ISO-Kategorien",
 	"browseTopics": "Filtern nach ISO-Kategorien",
 	"listOfCategories": "ISO-Kategorien",
-	"tempExtentBegin": "Gültigkeitszeitraum"
+	"tempExtentBegin": "Gültigkeitszeitraum",
+	"updateFrequency": "Pflegeintervall"
 }
