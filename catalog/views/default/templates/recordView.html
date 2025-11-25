@@ -240,8 +240,8 @@
               </td>
             </tr>
             <tr data-ng-repeat="(thesaurus, keywords) in mdView.current.record.keywordGroup">
-              <th>{{thesaurus | translate}}</th>
-              <td>
+              <th data-ng-if="thesaurus != 'GEMET - INSPIRE themes, version 1.0'">{{thesaurus | translate}}</th>
+              <td data-ng-if="thesaurus != 'GEMET - INSPIRE themes, version 1.0'">
                 <ul>
                   <li data-ng-repeat="k in keywords track by $index"
                       data-ng-if="k"
