@@ -39,7 +39,6 @@
     </div>
   </div>
 
-
   <!-- Group by role -->
   <div class="gn-contact" data-ng-if="mode == 'role'"
        data-ng-repeat="(roles, contactByRole) in mdContactsByRole">
@@ -49,7 +48,7 @@
       {{roles}}
       </span>
     </h3>
-    <div class="row" data-ng-repeat="(org, contact) in contactByRole | groupBy:'org'">
+    <div class="row" data-ng-repeat="(org, contact) in contactByRole | groupBy:'org'">
       <div class="col-md-8">
         <address>
           <strong data-ng-if="::c.website">
@@ -96,8 +95,8 @@
 
   <!-- Group by organisation/role -->
   <div class="gn-contact flex-row" data-ng-if="mode == 'org-role'"
-       data-ng-repeat="(org, contactByOrgRole) in mdContactsByOrgRole">
-    <address>
+       data-ng-repeat="(org, contactByOrg) in mdContacts | groupBy: 'org'">
+    <address data-ng-if="contactByOrg[0].org === org">
       <strong data-ng-if="::orgWebsite[org]">
         <i class="fa fa-fw fa-link"></i>
         <a data-ng-href="{{::orgWebsite[org]}}">{{org}}</a><br/>
@@ -106,14 +105,14 @@
         {{org}}
       </strong>
 
-      <div ng-repeat="(key, contactGroupByAddress) in contactByOrgRole | groupBy:'address'">
+      <div ng-repeat="(key, contactGroupByAddress) in contactByOrg | groupBy:'address'">
         <span data-ng-if="key != ''">
           <i class="fa fa-fw fa-map-marker"></i>
           {{key}}<br/>
         </span>
         <ul>
-          <li ng-repeat="(roles, contactGroupByRole) in contactGroupByAddress | groupBy:'roles'">
-            {{roles }}:<br/>
+          <li ng-repeat="(roles, contactGroupByRole) in contactGroupByAddress | groupBy:'role'">
+            Kontakt:<br/>
             <span data-ng-repeat="c in contactGroupByRole track by $index">
               <span data-ng-if="c.email != ''">
                 <i class="fa fa-fw fa-envelope"></i>
