@@ -540,5 +540,9 @@
     "batchApproveDirect": "Genehmigen Sie die Metadaten, ohne dass Sie sich im Status &quot;Übermittelt&quot; befinden müssen",
     "metadataInfoReport": "Informationen über die Metadaten",
     "metadataErrorReport": "Metadatenfehler",
-    "wmtsFailedToParseCapabilities": "Fehler beim Analysieren der GetCapabilities-Operationsantwort."
+    "wmtsFailedToParseCapabilities": "Fehler beim Analysieren der GetCapabilities-Operationsantwort.",
+    "service-download": "Downloaddienst",
+    "service-view": "Anzeigedienst",
+    "application": "Anwendung",
+    "service-ISO 23950 gateway": "Bibliotheksdienst"
 }
