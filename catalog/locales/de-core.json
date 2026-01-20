@@ -544,5 +544,6 @@
     "service-download": "Downloaddienst",
     "service-view": "Anzeigedienst",
     "application": "Anwendung",
-    "service-ISO 23950 gateway": "Bibliotheksdienst"
+    "service-ISO 23950 gateway": "Bibliotheksdienst",
+    "Service": "Dienst"
 }
