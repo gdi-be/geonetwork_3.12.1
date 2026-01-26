@@ -542,7 +542,7 @@
     "metadataErrorReport": "Metadatenfehler",
     "wmtsFailedToParseCapabilities": "Fehler beim Analysieren der GetCapabilities-Operationsantwort.",
     "service-download": "Downloaddienst",
-    "service-view": "Anzeigedienst",
+    "service-view": "Darstellungsdienst",
     "application": "Anwendung",
     "service-ISO 23950 gateway": "Bibliotheksdienst",
     "Service": "Dienst"
