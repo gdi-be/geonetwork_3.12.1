@@ -49,5 +49,7 @@
 	"updateFrequency": "Pflegeintervall",
 	"spatialRepresentationType": "Räumliche Darstellungsart",
 	"cl_spatialRepresentationType": "Räumliche Darstellungsart",
-	"maintenanceAndUpdateFrequencies": "Pflegeintervall"
+	"maintenanceAndUpdateFrequencies": "Pflegeintervall",
+	"services": "Dienste",
+	"Services": "Dienste"
 }
