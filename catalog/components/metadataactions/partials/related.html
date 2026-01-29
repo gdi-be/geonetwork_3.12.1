@@ -20,6 +20,8 @@
           </span>
         </strong>
         <i data-ng-if="mainType === 'DEFAULT' && type === 'onlines'" class="fa fa-chain"></i>
+        <i data-ng-if="type == 'application'" class="fa fa-desktop"></i>
+        <i data-ng-if="type == 'datasets'" class="fa gn-icon-dataset"></i>
         <i data-ng-if="type === 'services' && r.mdType[0] === 'service-download'" class="fa fa-download"></i>
         <i data-ng-if="type === 'services' && r.mdType[0] === 'service-view'" class="fa fa-eye"></i>
       </div>
