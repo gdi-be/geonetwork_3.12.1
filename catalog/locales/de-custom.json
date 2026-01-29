@@ -51,5 +51,6 @@
 	"cl_spatialRepresentationType": "Räumliche Darstellungsart",
 	"maintenanceAndUpdateFrequencies": "Pflegeintervall",
 	"services": "Dienste",
-	"Services": "Dienste"
+	"Services": "Dienste",
+	"downloads": "Downloaddienst (WFS)"
 }
