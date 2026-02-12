@@ -199,7 +199,7 @@
     "organization": "Organisation",
     "originator": "Urheber",
     "owner": "Eigentümer",
-    "atomChooseLayerToAdd": "Wähle eine Quelle",
+    "atomChooseLayerToAdd": "Wähle einen Dataset-Feed",
     "mapLoadError": "Laden der Karte von '{{url}}' ist fehlgeschlagen.",
     "emptyMapLoadError": "Karte von '{{url}}' ist leer.",
 	"pointOfContact": "Kontaktstelle",
